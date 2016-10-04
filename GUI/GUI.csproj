@@ -35,6 +35,9 @@
     <Reference Include="Parser">
       <HintPath>..\Parser\bin\Debug\Parser.dll</HintPath>
     </Reference>
+    <Reference Include="Plotter">
+      <HintPath>..\Plotter\bin\Debug\Plotter.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
