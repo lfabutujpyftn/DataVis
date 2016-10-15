@@ -1,0 +1,10 @@
+C:\Games\git\DataVis\GUI\bin\Release\GUI.exe.config
+C:\Games\git\DataVis\GUI\bin\Release\GUI.exe
+C:\Games\git\DataVis\GUI\bin\Release\GUI.pdb
+C:\Games\git\DataVis\GUI\bin\Release\Parser.dll
+C:\Games\git\DataVis\GUI\bin\Release\Parser.pdb
+C:\Games\git\DataVis\GUI\obj\Release\GUI.csprojResolveAssemblyReference.cache
+C:\Games\git\DataVis\GUI\obj\Release\GUI.Properties.Resources.resources
+C:\Games\git\DataVis\GUI\obj\Release\GUI.csproj.GenerateResource.Cache
+C:\Games\git\DataVis\GUI\obj\Release\GUI.exe
+C:\Games\git\DataVis\GUI\obj\Release\GUI.pdb

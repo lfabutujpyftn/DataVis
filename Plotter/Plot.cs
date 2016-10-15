@@ -73,13 +73,46 @@ namespace Plot
                     break;
             }
             
-            par += " linecolor rgb \"#" + _color + "\"";
+            //par += " linecolor rgb \"#" + _color + "\"";
             return par;
         }
         public void DrawFile(string filePath)
         {
             Console.WriteLine("Start draw file \"" + filePath + "\"");
             AwokeKnowing.GnuplotCSharp.GnuPlot.Plot("\"" + filePath + "\"", _GetParam());
+            Console.WriteLine("End draw file \"" + filePath + "\"");
+        }
+
+        private string _GetParam(string title)
+        {
+            AwokeKnowing.GnuplotCSharp.GnuPlot.Set("xlabel \"" + _xTitle + "\"");
+            AwokeKnowing.GnuplotCSharp.GnuPlot.Set("ylabel \"" + _yTitle + "\"");
+            AwokeKnowing.GnuplotCSharp.GnuPlot.Set("autoscale");
+            string par = "using 1:2 title \"" + title + "\"";
+            switch (_drawType)
+            {
+                case DrawType.Lines:
+                    par += " with lines";
+                    break;
+                case DrawType.Points:
+                    par += " with points";
+                    break;
+                default:
+                    break;
+            }
+
+            //par += " linecolor rgb \"#" + _color + "\"";
+            return par;
+        }
+        public void DrawFiles(ArrayList filePath, ArrayList titles)
+        {
+            Console.WriteLine("Start draw file \"" + filePath + "\"");
+            ArrayList param = new ArrayList();
+            foreach(string s in titles)
+            {
+                param.Add(_GetParam(s));
+            }
+            AwokeKnowing.GnuplotCSharp.GnuPlot.Plots(filePath, param);
             Console.WriteLine("End draw file \"" + filePath + "\"");
         }
 

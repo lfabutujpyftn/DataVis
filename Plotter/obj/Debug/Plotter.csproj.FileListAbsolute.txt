@@ -1,0 +1,7 @@
+C:\Games\git\DataVis\Plotter\bin\Debug\Plotter.dll
+C:\Games\git\DataVis\Plotter\bin\Debug\Plotter.pdb
+C:\Games\git\DataVis\Plotter\bin\Debug\GNUPlot.dll
+C:\Games\git\DataVis\Plotter\bin\Debug\GNUPlot.pdb
+C:\Games\git\DataVis\Plotter\obj\Debug\Plotter.csprojResolveAssemblyReference.cache
+C:\Games\git\DataVis\Plotter\obj\Debug\Plotter.dll
+C:\Games\git\DataVis\Plotter\obj\Debug\Plotter.pdb

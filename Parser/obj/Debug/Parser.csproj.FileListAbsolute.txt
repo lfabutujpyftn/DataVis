@@ -1,0 +1,7 @@
+C:\Games\git\DataVis\Parser\bin\Debug\Parser.dll
+C:\Games\git\DataVis\Parser\bin\Debug\Parser.pdb
+C:\Games\git\DataVis\Parser\bin\Debug\Tuner.dll
+C:\Games\git\DataVis\Parser\bin\Debug\Tuner.pdb
+C:\Games\git\DataVis\Parser\obj\Debug\Parser.csprojResolveAssemblyReference.cache
+C:\Games\git\DataVis\Parser\obj\Debug\Parser.dll
+C:\Games\git\DataVis\Parser\obj\Debug\Parser.pdb

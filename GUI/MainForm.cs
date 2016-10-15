@@ -9,18 +9,62 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Parser;
 using Plot;
+using Controller;
+using Tuner;
+using System.IO;
+using System.Collections;
 
 namespace GUI
 {
     public partial class MainForm : Form
     {
+        private CController controller;
         public MainForm()
         {
             InitializeComponent();
-            CParser pars = new CParser("C:\\Games\\git\\DataVis\\d_grg.rez", "C:\\Games\\git\\DataVis\\f_grg.rez");
-            pars.Parse();
-            Plot.Plot plt = new Plot.Plot();
-            plt.DrawFile("C:/Games/git/DataVis/tmp/tmp0");
+            controller = new CController();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            foreach(DataNode s in controller.getColums())
+            {
+                if(s.reduction != "x")
+                    if (s.measure != "служебный")
+                        checkedListBoxColoms.Items.Add(s.reduction + " " + s.name);
+            }
+            FileStream fileT = new FileStream("./tmp/ConstT/time", FileMode.Open, FileAccess.Read);
+            StreamReader readerT = new StreamReader(fileT);
+            while (!readerT.EndOfStream)
+            {
+                checkedListBoxTime.Items.Add(readerT.ReadLine());
+            }
+            readerT.Close();
+            fileT.Close();
+        }
+
+        private void buttonPlotCT_Click(object sender, EventArgs e)
+        {
+            if(checkedListBoxColoms.CheckedItems.Count != 0 && checkedListBoxTime.CheckedItems.Count != 0)
+            {
+                FileStream fileT = new FileStream("./tmp.tmp", FileMode.Create, FileAccess.Write);
+                StreamWriter wT = new StreamWriter(fileT);
+                ArrayList time = new ArrayList();
+                ArrayList coloms = new ArrayList();
+                foreach (string s in checkedListBoxTime.CheckedItems)
+                {
+                    wT.WriteLine(s);
+                    time.Add(s);
+                }
+                foreach (string s in checkedListBoxColoms.CheckedItems)
+                {
+                    wT.WriteLine(s);
+                    coloms.Add(s);
+                }
+                wT.Close();
+                fileT.Close();
+                controller.PlotSelectItemConstT(time, coloms);
+            }
         }
     }
 }

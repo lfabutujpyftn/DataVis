@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Linq;
+using System.Collections;
 
 namespace AwokeKnowing.GnuplotCSharp
 {
@@ -119,6 +120,19 @@ namespace AwokeKnowing.GnuplotCSharp
             PlotBuffer.Add(new StoredPlot(filenameOrFunction, options));
             Plot(PlotBuffer);
         }
+
+        public static void Plots(ArrayList filenameOrFunction, ArrayList param)
+        {
+            if (!Hold) PlotBuffer.Clear();
+            int i = 0;
+            foreach (string s in filenameOrFunction)
+            {
+                PlotBuffer.Add(new StoredPlot("\"" + s + "\"", param[i].ToString()));
+                i++;
+            }
+            Plot(PlotBuffer);
+        }
+
         public static void Plot(double[] y, string options = "")
         {
             if (!Hold) PlotBuffer.Clear();
