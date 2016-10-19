@@ -1,7 +1,3 @@
-C:\Games\git\DataVis\GUI\obj\Debug\GUI.csprojResolveAssemblyReference.cache
-C:\Games\git\DataVis\GUI\obj\Debug\GUI.MainForm.resources
-C:\Games\git\DataVis\GUI\obj\Debug\GUI.Properties.Resources.resources
-C:\Games\git\DataVis\GUI\obj\Debug\GUI.csproj.GenerateResource.Cache
 C:\Games\git\DataVis\GUI\bin\Debug\GUI.exe.config
 C:\Games\git\DataVis\GUI\bin\Debug\GUI.exe
 C:\Games\git\DataVis\GUI\bin\Debug\GUI.pdb
@@ -15,5 +11,9 @@ C:\Games\git\DataVis\GUI\bin\Debug\Parser.pdb
 C:\Games\git\DataVis\GUI\bin\Debug\Plotter.pdb
 C:\Games\git\DataVis\GUI\bin\Debug\Tuner.pdb
 C:\Games\git\DataVis\GUI\bin\Debug\GNUPlot.pdb
+C:\Games\git\DataVis\GUI\obj\Debug\GUI.csprojResolveAssemblyReference.cache
+C:\Games\git\DataVis\GUI\obj\Debug\GUI.MainForm.resources
+C:\Games\git\DataVis\GUI\obj\Debug\GUI.Properties.Resources.resources
+C:\Games\git\DataVis\GUI\obj\Debug\GUI.csproj.GenerateResource.Cache
 C:\Games\git\DataVis\GUI\obj\Debug\GUI.exe
 C:\Games\git\DataVis\GUI\obj\Debug\GUI.pdb

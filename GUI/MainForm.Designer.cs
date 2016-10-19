@@ -34,9 +34,13 @@
             this.checkedListBoxTime = new System.Windows.Forms.CheckedListBox();
             this.checkedListBoxColoms = new System.Windows.Forms.CheckedListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkedListBoxColAlongId = new System.Windows.Forms.CheckedListBox();
+            this.buttonPlotAlongId = new System.Windows.Forms.Button();
+            this.checkedListBoxAlongId = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -68,6 +72,7 @@
             // 
             // buttonPlotCT
             // 
+            this.buttonPlotCT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonPlotCT.Location = new System.Drawing.Point(378, 241);
             this.buttonPlotCT.Name = "buttonPlotCT";
             this.buttonPlotCT.Size = new System.Drawing.Size(75, 23);
@@ -78,6 +83,8 @@
             // 
             // checkedListBoxTime
             // 
+            this.checkedListBoxTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.checkedListBoxTime.FormattingEnabled = true;
             this.checkedListBoxTime.Location = new System.Drawing.Point(6, 6);
             this.checkedListBoxTime.Name = "checkedListBoxTime";
@@ -86,21 +93,57 @@
             // 
             // checkedListBoxColoms
             // 
+            this.checkedListBoxColoms.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.checkedListBoxColoms.FormattingEnabled = true;
             this.checkedListBoxColoms.Location = new System.Drawing.Point(149, 6);
             this.checkedListBoxColoms.Name = "checkedListBoxColoms";
-            this.checkedListBoxColoms.Size = new System.Drawing.Size(137, 259);
+            this.checkedListBoxColoms.Size = new System.Drawing.Size(138, 259);
             this.checkedListBoxColoms.TabIndex = 1;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.checkedListBoxColAlongId);
+            this.tabPage2.Controls.Add(this.buttonPlotAlongId);
+            this.tabPage2.Controls.Add(this.checkedListBoxAlongId);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(459, 270);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "AlongID";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // checkedListBoxColAlongId
+            // 
+            this.checkedListBoxColAlongId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkedListBoxColAlongId.FormattingEnabled = true;
+            this.checkedListBoxColAlongId.Location = new System.Drawing.Point(195, 6);
+            this.checkedListBoxColAlongId.Name = "checkedListBoxColAlongId";
+            this.checkedListBoxColAlongId.Size = new System.Drawing.Size(148, 259);
+            this.checkedListBoxColAlongId.TabIndex = 2;
+            // 
+            // buttonPlotAlongId
+            // 
+            this.buttonPlotAlongId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPlotAlongId.Location = new System.Drawing.Point(378, 241);
+            this.buttonPlotAlongId.Name = "buttonPlotAlongId";
+            this.buttonPlotAlongId.Size = new System.Drawing.Size(75, 23);
+            this.buttonPlotAlongId.TabIndex = 1;
+            this.buttonPlotAlongId.Text = "Plot";
+            this.buttonPlotAlongId.UseVisualStyleBackColor = true;
+            this.buttonPlotAlongId.Click += new System.EventHandler(this.buttonPlotAlongId_Click);
+            // 
+            // checkedListBoxAlongId
+            // 
+            this.checkedListBoxAlongId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkedListBoxAlongId.FormattingEnabled = true;
+            this.checkedListBoxAlongId.Location = new System.Drawing.Point(6, 6);
+            this.checkedListBoxAlongId.Name = "checkedListBoxAlongId";
+            this.checkedListBoxAlongId.Size = new System.Drawing.Size(183, 259);
+            this.checkedListBoxAlongId.TabIndex = 0;
             // 
             // label1
             // 
@@ -123,6 +166,7 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,6 +181,9 @@
         private System.Windows.Forms.CheckedListBox checkedListBoxTime;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonPlotCT;
+        private System.Windows.Forms.CheckedListBox checkedListBoxAlongId;
+        private System.Windows.Forms.Button buttonPlotAlongId;
+        private System.Windows.Forms.CheckedListBox checkedListBoxColAlongId;
     }
 }
 

@@ -1,5 +1,4 @@
 C:\Games\git\DataVis\GNUPlot\bin\Debug\GNUPlot.dll
 C:\Games\git\DataVis\GNUPlot\bin\Debug\GNUPlot.pdb
-C:\Games\git\DataVis\GNUPlot\obj\Debug\GNUPlot.csprojResolveAssemblyReference.cache
 C:\Games\git\DataVis\GNUPlot\obj\Debug\GNUPlot.dll
 C:\Games\git\DataVis\GNUPlot\obj\Debug\GNUPlot.pdb
