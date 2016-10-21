@@ -17,3 +17,4 @@ C:\Games\git\DataVis\GUI\obj\Debug\GUI.Properties.Resources.resources
 C:\Games\git\DataVis\GUI\obj\Debug\GUI.csproj.GenerateResource.Cache
 C:\Games\git\DataVis\GUI\obj\Debug\GUI.exe
 C:\Games\git\DataVis\GUI\obj\Debug\GUI.pdb
+C:\Games\git\DataVis\GUI\obj\Debug\GUI.Load.resources

@@ -19,10 +19,13 @@ namespace GUI
     public partial class MainForm : Form
     {
         private CController controller;
-        public MainForm()
+        private Form main;
+        public MainForm(Form f)
         {
             InitializeComponent();
             controller = new CController();
+            main = f;
+            main.Enabled = false;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -67,9 +70,14 @@ namespace GUI
                 }
                 string res = arr[0].ToString() + " " + dict[arr[1].ToString()];
                 checkedListBoxAlongId.Items.Add(res);
+                checkedListBoxXT.Items.Add(res);
             }
             readerID.Close();
             fileID.Close();
+        }
+        private void MainForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            main.Enabled = true;
         }
 
         private void buttonPlotCT_Click(object sender, EventArgs e)
@@ -117,6 +125,25 @@ namespace GUI
                 wID.Close();
                 fileID.Close();
                 controller.PlotSelectItemAlongID(ID, coloms);
+            }
+        }
+
+        private void buttonPlotXt_Click(object sender, EventArgs e)
+        {
+            if (checkedListBoxXT.CheckedItems.Count != 0)
+            {
+                FileStream fileID = new FileStream("./tmp.tmp", FileMode.Create, FileAccess.Write);
+                StreamWriter wID = new StreamWriter(fileID);
+                ArrayList ID = new ArrayList();
+                //ArrayList coloms = new ArrayList();
+                foreach (string s in checkedListBoxXT.CheckedItems)
+                {
+                    wID.WriteLine(s);
+                    ID.Add(s);
+                }
+                wID.Close();
+                fileID.Close();
+                controller.PlotSelectItemXT(ID);
             }
         }
     }

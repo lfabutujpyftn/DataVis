@@ -26,6 +26,7 @@ namespace Controller
             //parser.ParseConstT();
             //parser.ParseConstX();
             //parser.ParseAlongID();
+            //parser.ParseXT();
             plt = new Plot.Plot();
         }
 
@@ -97,6 +98,12 @@ namespace Controller
             {
                 dict.Add(node.name, node.reduction);
             }
+            Dictionary<string, string> dict2 = new Dictionary<string, string>();
+            foreach (DataNodeLine node in tuner.typeLineTun)
+            {
+                dict2.Add(node.reduction, node.name);
+            }
+
             ArrayList reduct = new ArrayList();
             foreach (string s in coloms)
             {
@@ -136,13 +143,90 @@ namespace Controller
                 int tmpi = 0;
                 foreach (string s in idline)
                 {
-                    fileList.Add("./tmp/AlongID/" + s + "_" + numline[tmpi] + "_x_" + s2);
-                    titleList.Add(s2 + " ID=" + s);
+                    fileList.Add("./tmp/AlongID/" + s + "_" + numline[tmpi] + "_t_" + s2);
+                    titleList.Add(s2 + ", " + dict2[numline[tmpi].ToString()] + ", ID=" + s);
                     tmpi++;
                 }
                 if (s2 != reduct[0].ToString())
                     variable += ", " + s2;
             }
+            plt.XTitle = "t";
+            plt.YTitle = variable;
+            plt.DrawFiles(fileList, titleList);
+        }
+
+        public void PlotSelectItemXT(ArrayList ID)
+        {
+
+            //plt.Close();
+            //plt = new Plot.Plot();
+            string variable = "";
+            /*foreach (DataNode s in tuner.columFGRGtun)
+            {
+                if(s.name + " " + s.reduction == coloms[0].ToString())
+                {
+                    variable = s.reduction;
+
+                    break;
+                }
+            }*/
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            foreach (DataNodeLine node in tuner.typeLineTun)
+            {
+                dict.Add(node.name, node.reduction);
+            }
+            Dictionary<string, string> dict2 = new Dictionary<string, string>();
+            foreach (DataNodeLine node in tuner.typeLineTun)
+            {
+                dict2.Add(node.reduction, node.name);
+            }
+
+           // ArrayList reduct = new ArrayList();
+            /*foreach (string s in coloms)
+            {
+                string[] tmp = s.Split(new char[] { ' ' });
+                reduct.Add(tmp[0]);
+            }*/
+            ArrayList idline = new ArrayList();
+            ArrayList numline = new ArrayList();
+            foreach (string str in ID)
+            {
+                string[] tmp = str.Split(new char[] { ' ' });
+                //var arr = new ArrayList();
+                int flag = 0;
+                string res = "";
+                foreach (string s in tmp)
+                {
+                    if (s.Trim() != "")
+                    {
+                        if (flag == 0)
+                            idline.Add(s);
+                        else if (flag == 1)
+                            res = s;
+                        else
+                            res += " " + s;
+                        flag++;
+                    }
+                }
+                numline.Add(dict[res]);
+            }
+
+
+            ArrayList fileList = new ArrayList();
+            ArrayList titleList = new ArrayList();
+            variable = "t";// reduct[0].ToString();
+            //foreach (string s2 in reduct)
+            //{
+                int tmpi = 0;
+                foreach (string s in idline)
+                {
+                    fileList.Add("./tmp/XT/" + s + "_" + numline[tmpi] + "_x_t");
+                    titleList.Add(dict2[numline[tmpi].ToString()] + ", ID=" + s);
+                    tmpi++; 
+                }
+                //if (s2 != reduct[0].ToString())
+                  //  variable += ", " + s2;
+            //}
             plt.XTitle = "x";
             plt.YTitle = variable;
             plt.DrawFiles(fileList, titleList);

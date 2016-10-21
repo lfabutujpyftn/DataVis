@@ -37,10 +37,14 @@
             this.checkedListBoxColAlongId = new System.Windows.Forms.CheckedListBox();
             this.buttonPlotAlongId = new System.Windows.Forms.Button();
             this.checkedListBoxAlongId = new System.Windows.Forms.CheckedListBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.buttonPlotXt = new System.Windows.Forms.Button();
+            this.checkedListBoxXT = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -50,6 +54,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Controls.Add(this.tabPage2);
+            this.tabControl.Controls.Add(this.tabPage3);
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Multiline = true;
             this.tabControl.Name = "tabControl";
@@ -145,6 +150,36 @@
             this.checkedListBoxAlongId.Size = new System.Drawing.Size(183, 259);
             this.checkedListBoxAlongId.TabIndex = 0;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.buttonPlotXt);
+            this.tabPage3.Controls.Add(this.checkedListBoxXT);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(459, 270);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "XT";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // buttonPlotXt
+            // 
+            this.buttonPlotXt.Location = new System.Drawing.Point(378, 241);
+            this.buttonPlotXt.Name = "buttonPlotXt";
+            this.buttonPlotXt.Size = new System.Drawing.Size(75, 23);
+            this.buttonPlotXt.TabIndex = 1;
+            this.buttonPlotXt.Text = "Plot";
+            this.buttonPlotXt.UseVisualStyleBackColor = true;
+            this.buttonPlotXt.Click += new System.EventHandler(this.buttonPlotXt_Click);
+            // 
+            // checkedListBoxXT
+            // 
+            this.checkedListBoxXT.FormattingEnabled = true;
+            this.checkedListBoxXT.Location = new System.Drawing.Point(6, 6);
+            this.checkedListBoxXT.Name = "checkedListBoxXT";
+            this.checkedListBoxXT.Size = new System.Drawing.Size(233, 259);
+            this.checkedListBoxXT.TabIndex = 0;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -164,9 +199,11 @@
             this.Name = "MainForm";
             this.Text = "Program";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_Closing);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -184,6 +221,9 @@
         private System.Windows.Forms.CheckedListBox checkedListBoxAlongId;
         private System.Windows.Forms.Button buttonPlotAlongId;
         private System.Windows.Forms.CheckedListBox checkedListBoxColAlongId;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button buttonPlotXt;
+        private System.Windows.Forms.CheckedListBox checkedListBoxXT;
     }
 }
 

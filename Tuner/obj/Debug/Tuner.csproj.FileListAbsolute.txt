@@ -1,4 +1,5 @@
 C:\Games\git\DataVis\Tuner\bin\Debug\Tuner.dll
 C:\Games\git\DataVis\Tuner\bin\Debug\Tuner.pdb
+C:\Games\git\DataVis\Tuner\obj\Debug\Tuner.csprojResolveAssemblyReference.cache
 C:\Games\git\DataVis\Tuner\obj\Debug\Tuner.dll
 C:\Games\git\DataVis\Tuner\obj\Debug\Tuner.pdb

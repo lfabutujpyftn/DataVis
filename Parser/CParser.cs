@@ -315,14 +315,15 @@ namespace Parser
         }
         public void ParseAlongID()
         {
-            //FileStream filed = new FileStream(filedgrg, FileMode.Open, FileAccess.Read);
+            FileStream filed = new FileStream(filedgrg, FileMode.Open, FileAccess.Read);
             FileStream filef = new FileStream(filefgrg, FileMode.Open, FileAccess.Read);
-            //StreamReader readerd = new StreamReader(filed);
+            StreamReader readerd = new StreamReader(filed);
             StreamReader readerf = new StreamReader(filef);
             Dictionary<string, int> dict = new Dictionary<string, int>();
             Dictionary<string, int> dictWOX = new Dictionary<string, int>();
             Dictionary<string, int> dictIndextInFile = new Dictionary<string, int>();
             Dictionary<string, ArrayList> fileDic = new Dictionary<string,ArrayList>();
+            Dictionary<int, string> times = new Dictionary<int, string>();
             ArrayList files = new ArrayList();
             int tmpi = 0;
             int IDcolom = 0;
@@ -351,8 +352,34 @@ namespace Parser
             Directory.CreateDirectory("./tmp/AlongID");
             FileStream fileID = new FileStream("./tmp/AlongID/ID", FileMode.Create, FileAccess.Write);
             StreamWriter writerID = new StreamWriter(fileID);
+            while(!readerd.EndOfStream)
+            {
+                string str = readerd.ReadLine();
+                string[] tmp = str.Split(new char[] { ' ' });
+                var arr = new ArrayList();
+                foreach (string s in tmp)
+                {
+                    if (s.Trim() != "")
+                    {
+                        arr.Add(s);
+                    }
+                }
+                Console.WriteLine("!!!time" + arr[3].ToString());
+                times.Add(Int32.Parse(arr[3].ToString()), arr[1].ToString());
+            }
+            int lineNum = 0;
             while(!readerf.EndOfStream)
             {
+                lineNum++;
+                string time = "";
+                foreach(var iter in times)
+                {
+                    if(lineNum <= iter.Key)
+                    {
+                        time = iter.Value;
+                        break;
+                    }
+                }
                 string str = readerf.ReadLine();
                 string[] tmp = str.Split(new char[] { ' ' });
                 var arr = new ArrayList();
@@ -369,7 +396,8 @@ namespace Parser
                     {
                         ArrayList arrlist = fileDic[arr[IDcolom].ToString() + " " + arr[typeColom].ToString()];
                         //Console.WriteLine("count " + arrlist.Count + " " + iter.Value);
-                        ((StreamWriter)arrlist[dictIndextInFile[iter.Key]]).WriteLine(arr[dict["x"]] + " " + arr[iter.Value]);
+                        //((StreamWriter)arrlist[dictIndextInFile[iter.Key]]).WriteLine(arr[dict["x"]] + " " + arr[iter.Value]);
+                        ((StreamWriter)arrlist[dictIndextInFile[iter.Key]]).WriteLine(time + " " + arr[iter.Value]);
                         
                     }
                     
@@ -381,7 +409,7 @@ namespace Parser
                     int flagIndex = 0;
                     foreach(var iter in dictWOX)
                     {
-                        FileStream tmpName = new FileStream("./tmp/AlongID/" + arr[IDcolom].ToString() + "_" + arr[typeColom].ToString()+ "_x" + "_" + iter.Key, FileMode.Create, FileAccess.Write);
+                        FileStream tmpName = new FileStream("./tmp/AlongID/" + arr[IDcolom].ToString() + "_" + arr[typeColom].ToString()+ "_t" + "_" + iter.Key, FileMode.Create, FileAccess.Write);
                         files.Add(tmpName);
                         if(!dictIndextInFile.ContainsKey(iter.Key))
                             dictIndextInFile.Add(iter.Key, flagIndex);
@@ -411,7 +439,135 @@ namespace Parser
             readerf.Close();
             filef.Close();
         }
+
+        public void ParseXT()
+        {
+            FileStream filed = new FileStream(filedgrg, FileMode.Open, FileAccess.Read);
+            FileStream filef = new FileStream(filefgrg, FileMode.Open, FileAccess.Read);
+            StreamReader readerd = new StreamReader(filed);
+            StreamReader readerf = new StreamReader(filef);
+            Dictionary<string, int> dict = new Dictionary<string, int>();
+            //Dictionary<string, int> dictWOX = new Dictionary<string, int>();
+            //Dictionary<string, int> dictIndextInFile = new Dictionary<string, int>();
+            Dictionary<string, StreamWriter> fileDic = new Dictionary<string, StreamWriter>();
+            Dictionary<int, string> times = new Dictionary<int, string>();
+            ArrayList files = new ArrayList();
+            int tmpi = 0;
+            int IDcolom = 0;
+            int typeColom = 0;
+            /**/
+            foreach (DataNode data in columsTun)
+            {
+                if (data.measure != "служебный")
+                    dict.Add(data.reduction, tmpi);
+                if (data.reduction == "ID")
+                    IDcolom = tmpi;
+                if(data.reduction == "type")
+                {
+                    typeColom = tmpi;
+                }
+                tmpi++;
+            }
+            Console.WriteLine(IDcolom);
+            Console.WriteLine(typeColom);
+            /*foreach (var i in dict)
+            {
+                if (i.Key != "x")
+                    dictWOX.Add(i.Key, i.Value);
+                Console.WriteLine(i.Key + " " + i.Value);
+            }*/
+            Directory.CreateDirectory("./tmp/XT");
+            FileStream fileID = new FileStream("./tmp/XT/ID", FileMode.Create, FileAccess.Write);
+            StreamWriter writerID = new StreamWriter(fileID);
+            while(!readerd.EndOfStream)
+            {
+                string str = readerd.ReadLine();
+                string[] tmp = str.Split(new char[] { ' ' });
+                var arr = new ArrayList();
+                foreach (string s in tmp)
+                {
+                    if (s.Trim() != "")
+                    {
+                        arr.Add(s);
+                    }
+                }
+                Console.WriteLine("!!!time" + arr[3].ToString());
+                times.Add(Int32.Parse(arr[3].ToString()), arr[1].ToString());
+            }
+            int lineNum = 0;
+            while(!readerf.EndOfStream)
+            {
+                lineNum++;
+                string time = "";
+                foreach(var iter in times)
+                {
+                    if(lineNum <= iter.Key)
+                    {
+                        time = iter.Value;
+                        break;
+                    }
+                }
+                string str = readerf.ReadLine();
+                string[] tmp = str.Split(new char[] { ' ' });
+                var arr = new ArrayList();
+                foreach (string s in tmp)
+                {
+                    if (s.Trim() != "")
+                    {
+                        arr.Add(s);
+                    }
+                }
+                if (fileDic.ContainsKey(arr[IDcolom].ToString() + " " + arr[typeColom].ToString()))
+                {
+                    //foreach(var iter in dictWOX)
+                    //{
+                        StreamWriter writer = fileDic[arr[IDcolom].ToString() + " " + arr[typeColom].ToString()];
+                        //Console.WriteLine("count " + arrlist.Count + " " + iter.Value);
+                        //((StreamWriter)arrlist[dictIndextInFile[iter.Key]]).WriteLine(arr[dict["x"]] + " " + arr[iter.Value]);
+                       // ((StreamWriter)arrlist[dictIndextInFile[iter.Key]]).WriteLine(time + " " + arr[iter.Value]);
+                        writer.WriteLine(arr[dict["x"]] + " " + time);
+                        
+                   // }
+                    
+                }
+                else
+                {
+                    Console.WriteLine("adas");
+                    //ArrayList writers = new ArrayList();
+                    int flagIndex = 0;
+                    //foreach(var iter in dictWOX)
+                    //{
+                        FileStream tmpName = new FileStream("./tmp/XT/" + arr[IDcolom].ToString() + "_" + arr[typeColom].ToString()+ "_x_t", FileMode.Create, FileAccess.Write);
+                        files.Add(tmpName);
+                        //if(!dictIndextInFile.ContainsKey(iter.Key))
+                          //  dictIndextInFile.Add(iter.Key, flagIndex);
+                        //++flagIndex;
+                        StreamWriter writer = new StreamWriter(tmpName);
+                    //}
+                    fileDic.Add(arr[IDcolom].ToString() + " " + arr[typeColom].ToString(), writer);
+                }
+            }
+            foreach(StreamWriter iter in fileDic.Values)
+            {
+                iter.Close();
+            }
+            foreach(FileStream iter in files)
+            {
+                iter.Close();
+            }
+            foreach(string iter in fileDic.Keys)
+            {
+                writerID.WriteLine(iter);
+            }
+            writerID.Close();
+            fileID.Close();
+            readerf.Close();
+            filef.Close();
+        }
     }
+
+
+
     public class Test
     {
         static void Main()

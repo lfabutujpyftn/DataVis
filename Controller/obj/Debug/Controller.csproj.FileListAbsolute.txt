@@ -1,4 +1,3 @@
-C:\Games\git\DataVis\Controller\bin\Debug\Controller.dll
 C:\Games\git\DataVis\Controller\bin\Debug\Controller.pdb
 C:\Games\git\DataVis\Controller\bin\Debug\Parser.dll
 C:\Games\git\DataVis\Controller\bin\Debug\Plotter.dll
@@ -9,5 +8,6 @@ C:\Games\git\DataVis\Controller\bin\Debug\Plotter.pdb
 C:\Games\git\DataVis\Controller\bin\Debug\Tuner.pdb
 C:\Games\git\DataVis\Controller\bin\Debug\GNUPlot.pdb
 C:\Games\git\DataVis\Controller\obj\Debug\Controller.csprojResolveAssemblyReference.cache
-C:\Games\git\DataVis\Controller\obj\Debug\Controller.dll
 C:\Games\git\DataVis\Controller\obj\Debug\Controller.pdb
+C:\Games\git\DataVis\Controller\bin\Debug\Controller.dll
+C:\Games\git\DataVis\Controller\obj\Debug\Controller.dll
