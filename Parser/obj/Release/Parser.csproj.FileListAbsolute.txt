@@ -1,4 +1,6 @@
 C:\Games\git\DataVis\Parser\bin\Release\Parser.dll
 C:\Games\git\DataVis\Parser\bin\Release\Parser.pdb
+C:\Games\git\DataVis\Parser\bin\Release\Tuner.dll
+C:\Games\git\DataVis\Parser\bin\Release\Tuner.pdb
 C:\Games\git\DataVis\Parser\obj\Release\Parser.dll
 C:\Games\git\DataVis\Parser\obj\Release\Parser.pdb

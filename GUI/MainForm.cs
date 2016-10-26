@@ -18,13 +18,24 @@ namespace GUI
 {
     public partial class MainForm : Form
     {
-        private CController controller;
+        public CController controller;
         private Form main;
-        public MainForm(Form f)
+        private string dir;
+        public MainForm(Form f, string dgrg, string fgrg, string dir)
         {
             InitializeComponent();
-            controller = new CController();
+            controller = new CController(dgrg, fgrg, dir);
             main = f;
+            this.dir = dir;
+            main.Enabled = false;
+        }
+
+        public MainForm(Form f, string dir)
+        {
+            InitializeComponent();
+            controller = new CController(dir);
+            main = f;
+            this.dir = dir;
             main.Enabled = false;
         }
 
@@ -39,7 +50,7 @@ namespace GUI
                         checkedListBoxColAlongId.Items.Add(s.reduction + " " + s.name);
                     }
             }
-            FileStream fileT = new FileStream("./tmp/ConstT/time", FileMode.Open, FileAccess.Read);
+            FileStream fileT = new FileStream(dir + "/ConstT/time", FileMode.Open, FileAccess.Read);
             StreamReader readerT = new StreamReader(fileT);
             while (!readerT.EndOfStream)
             {
@@ -54,7 +65,7 @@ namespace GUI
                 dict.Add(i.reduction, i.name);
             }
 
-            FileStream fileID = new FileStream("./tmp/AlongID/ID", FileMode.Open, FileAccess.Read);
+            FileStream fileID = new FileStream(dir + "/AlongID_XT/ID", FileMode.Open, FileAccess.Read);
             StreamReader readerID = new StreamReader(fileID);
             while (!readerID.EndOfStream)
             {
@@ -84,7 +95,7 @@ namespace GUI
         {
             if(checkedListBoxColoms.CheckedItems.Count != 0 && checkedListBoxTime.CheckedItems.Count != 0)
             {
-                FileStream fileT = new FileStream("./tmp.tmp", FileMode.Create, FileAccess.Write);
+                FileStream fileT = new FileStream(dir + "/tmp.tmp", FileMode.Create, FileAccess.Write);
                 StreamWriter wT = new StreamWriter(fileT);
                 ArrayList time = new ArrayList();
                 ArrayList coloms = new ArrayList();
@@ -108,7 +119,7 @@ namespace GUI
         {
             if (checkedListBoxAlongId.CheckedItems.Count != 0 && checkedListBoxColAlongId.CheckedItems.Count != 0)
             {
-                FileStream fileID = new FileStream("./tmp.tmp", FileMode.Create, FileAccess.Write);
+                FileStream fileID = new FileStream(dir + "/tmp.tmp", FileMode.Create, FileAccess.Write);
                 StreamWriter wID = new StreamWriter(fileID);
                 ArrayList ID = new ArrayList();
                 ArrayList coloms = new ArrayList();
@@ -132,7 +143,7 @@ namespace GUI
         {
             if (checkedListBoxXT.CheckedItems.Count != 0)
             {
-                FileStream fileID = new FileStream("./tmp.tmp", FileMode.Create, FileAccess.Write);
+                FileStream fileID = new FileStream(dir + "/tmp.tmp", FileMode.Create, FileAccess.Write);
                 StreamWriter wID = new StreamWriter(fileID);
                 ArrayList ID = new ArrayList();
                 //ArrayList coloms = new ArrayList();

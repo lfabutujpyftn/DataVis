@@ -19,14 +19,15 @@ namespace GUI
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var openForm = new Open(this);
+            openForm.Show();
         }
 
         private void parseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Console.WriteLine("QWQW");
-            var mainform = new MainForm(this);
-            mainform.Show();
+            var parseForm = new Parse(this);
+            parseForm.Show();
             
         }
     }
