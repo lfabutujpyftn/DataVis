@@ -15,12 +15,18 @@ namespace Plot
         private string _xTitle;
         private string _yTitle;
         private string _title;
+        private bool legend;
         /*public Color Color 
         {
             get { return _color;}
             set { _color = value;}
         }*/
 
+        public bool Legend
+        {
+            get { return legend; }
+            set { legend = value; }
+        }
         public string Color
         {
             get { return _color; }
@@ -55,6 +61,7 @@ namespace Plot
         {
             _drawType = global::Plot.DrawType.Lines;
             _color = "000000";
+            legend = false;
         }
         private string _GetParam()
         {
@@ -88,7 +95,11 @@ namespace Plot
             AwokeKnowing.GnuplotCSharp.GnuPlot.Set("xlabel \"" + _xTitle + "\"");
             AwokeKnowing.GnuplotCSharp.GnuPlot.Set("ylabel \"" + _yTitle + "\"");
             AwokeKnowing.GnuplotCSharp.GnuPlot.Set("autoscale");
-            string par = "using 1:2 title \"" + title + "\"";
+            string par = "using 1:2 ";
+            if (legend)
+                par += "title \"" + title + "\"";
+            else
+                par += "notitle";
             switch (_drawType)
             {
                 case DrawType.Lines:

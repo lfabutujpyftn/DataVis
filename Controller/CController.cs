@@ -8,6 +8,7 @@ using Parser;
 using System.Collections;
 using Plot;
 using System.IO;
+using System.Globalization;
 
 namespace Controller
 {
@@ -18,17 +19,22 @@ namespace Controller
         public Plot.Plot plt;
         public string dir;
         //plt.DrawFile("C:/Games/git/DataVis/GUI/bin/Debug/tmp/ConstT/1.0539576e-002_x_u");
-        public CController(string d, string f, string dir)
+        public CController(string d, string f, string o, string dir)
         {
-            tuner = new CTuner();
+            if(Directory.Exists(dir))
+            {
+                Directory.Delete(dir, true);
+            }
+            Directory.CreateDirectory(dir);
+            tuner = new CTuner(dir, o);
             tuner.TUN();
             this.dir = dir;
             //tuner.printTun();
-            //parser = new CParser("C:\\Games\\git\\DataVis\\new_d.rez","C:\\Games\\git\\DataVis\\new_f.rez", tuner.columFGRGtun, tuner.typeLineTun);
-            //parser = new CParser("C:\\Games\\git\\DataVis\\d_grg.rez", "C:\\Games\\git\\DataVis\\f_grg.rez", tuner.columFGRGtun, tuner.typeLineTun);
+            //parser = new CParser("C:\\Games\\git\\DataVis\\new_d.rez", "C:\\Games\\git\\DataVis\\new_f.rez", "C:\\Games\\git\\DataVis\\Data", tuner.columFGRGtun, tuner.typeLineTun);
+            //parser = new CParser("C:\\Games\\git\\DataVis\\d_grg.rez", "C:\\Games\\git\\DataVis\\f_grg.rez", "C:\\Games\\git\\DataVis\\Data", tuner.columFGRGtun, tuner.typeLineTun);
             parser = new CParser(d, f, dir, tuner.columFGRGtun, tuner.typeLineTun);
            // parser.ParseConstT();
-            //parser.ParseConstX();
+            //parser.ParseConstXall();
            // parser.ParseAlongID_XT();
             //parser.ParseXT();
             //parser.Parse();
@@ -36,13 +42,13 @@ namespace Controller
         }
         public CController(string dir)
         {
-            tuner = new CTuner();
+            tuner = new CTuner(dir);
             tuner.TUN();
             this.dir = dir;
             //tuner.printTun();
             //parser = new CParser("C:\\Games\\git\\DataVis\\new_d.rez","C:\\Games\\git\\DataVis\\new_f.rez", tuner.columFGRGtun, tuner.typeLineTun);
             //parser = new CParser("C:\\Games\\git\\DataVis\\d_grg.rez", "C:\\Games\\git\\DataVis\\f_grg.rez", tuner.columFGRGtun, tuner.typeLineTun);
-            //parser = new CParser(d, f, dir, tuner.columFGRGtun, tuner.typeLineTun);
+            parser = new CParser(dir, tuner.columFGRGtun, tuner.typeLineTun);
             //parser.ParseConstT();
             //parser.ParseConstX();
             //parser.ParseAlongID();
@@ -64,7 +70,12 @@ namespace Controller
         }*/
         public void ParseCX()
         {
-            //parser.ParseConstT();
+            parser.ParseConstXall();
+        }
+
+        public void ParseCX(double arg)
+        {
+            parser.ParseConstXall(arg);
         }
 
         public ArrayList getLineType()
@@ -296,15 +307,21 @@ namespace Controller
             plt.YTitle = variable;
             plt.DrawFiles(fileList, titleList);
         }
+        public bool Legend
+        {
+            set { plt.Legend = value; }
+        }
     }
-    public class Test
+   /* public class Test
     {
         static void Main()
         {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            Console.WriteLine(CultureInfo.CurrentCulture.ToString());
             Console.WriteLine("hi");
-            var contr = new CController("C:\\Games\\git\\DataVis\\new_d.rez",
-                "C:\\Games\\git\\DataVis\\new_f.rez",
-                "C:\\Games\\git\\DataVis\\data");
+            var contr = new CController("C:\\Games\\git\\DataVis\\d_grg.rez",
+                "C:\\Games\\git\\DataVis\\f_grg.rez",
+                "C:\\AAAA");
         }
-    }
+    }*/
 }

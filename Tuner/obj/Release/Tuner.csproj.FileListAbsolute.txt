@@ -1,0 +1,5 @@
+C:\Games\git\DataVis\Tuner\bin\Release\Tuner.dll
+C:\Games\git\DataVis\Tuner\bin\Release\Tuner.pdb
+C:\Games\git\DataVis\Tuner\obj\Release\Tuner.csprojResolveAssemblyReference.cache
+C:\Games\git\DataVis\Tuner\obj\Release\Tuner.dll
+C:\Games\git\DataVis\Tuner\obj\Release\Tuner.pdb

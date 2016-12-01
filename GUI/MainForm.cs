@@ -16,31 +16,58 @@ using System.Collections;
 
 namespace GUI
 {
+    
     public partial class MainForm : Form
     {
         public CController controller;
-        private Form main;
-        private string dir;
-        public MainForm(Form f, string dgrg, string fgrg, string dir)
+        //private Form main;
+        public string dir;
+        public string dgrg;
+        public string fgrg;
+        public string ogrg;
+        bool legend;
+
+        public MainForm()
         {
             InitializeComponent();
-            controller = new CController(dgrg, fgrg, dir);
-            main = f;
-            this.dir = dir;
-            main.Enabled = false;
+            legend = false;
         }
 
-        public MainForm(Form f, string dir)
+        public void init(string dir)
         {
-            InitializeComponent();
             controller = new CController(dir);
-            main = f;
             this.dir = dir;
-            main.Enabled = false;
+            initData(); 
+            tabControl.Enabled = true;
+            settingToolStripMenuItem.Enabled = true;
+            videlitToolStripMenuItem.Enabled = true;
+
+        }
+        public void init(string dgrg, string fgrg, string ogrg, string dir)
+        {
+            controller = new CController(dgrg, fgrg, ogrg, dir);
+            this.dir = dir;
+            this.dgrg = dgrg;
+            this.fgrg = fgrg;
+            this.ogrg = ogrg;
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        public void initFin()
         {
+            initData();
+            tabControl.Enabled = true;
+            settingToolStripMenuItem.Enabled = true;
+            videlitToolStripMenuItem.Enabled = true;
+        }
+
+        public void initData()
+        {
+            checkedListBoxAlongId.Items.Clear();
+            checkedListBoxColAlongId.Items.Clear();
+            checkedListBoxColoms.Items.Clear();
+            checkedListBoxTime.Items.Clear();
+            checkedListBoxXT.Items.Clear();
+            
             foreach(DataNode s in controller.getColums())
             {
                 if(s.reduction != "x")
@@ -48,6 +75,7 @@ namespace GUI
                     {
                         checkedListBoxColoms.Items.Add(s.reduction + " " + s.name);
                         checkedListBoxColAlongId.Items.Add(s.reduction + " " + s.name);
+                        //checkedListBoxCX.Items.Add(s.reduction + " " + s.name);
                     }
             }
             FileStream fileT = new FileStream(dir + "/ConstT/time", FileMode.Open, FileAccess.Read);
@@ -85,11 +113,16 @@ namespace GUI
             }
             readerID.Close();
             fileID.Close();
+            
         }
-        private void MainForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+
+        private void MainForm_Load(object sender, EventArgs e)
         {
-            main.Enabled = true;
+            tabControl.Enabled = false;
+            settingToolStripMenuItem.Enabled = false;
+            videlitToolStripMenuItem.Enabled = false;
         }
+        
 
         private void buttonPlotCT_Click(object sender, EventArgs e)
         {
@@ -157,5 +190,204 @@ namespace GUI
                 controller.PlotSelectItemXT(ID);
             }
         }
+
+        private void legendToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(legendToolStripMenuItem.Checked)
+            {
+                legendToolStripMenuItem.Checked = false;
+                legend = false;
+
+            }
+            else
+            {
+                legend = true;
+                legendToolStripMenuItem.Checked = true;
+            }
+            controller.Legend = legend;
+        }
+
+        private void videlitallToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(tabControl.SelectedIndex == 0)
+            {
+                for (int i = 0; i < checkedListBoxTime.Items.Count; ++i )
+                {
+                    checkedListBoxTime.SetItemChecked(i, true);
+                }
+            }
+            if (tabControl.SelectedIndex == 1)
+            {
+                for (int i = 0; i < checkedListBoxAlongId.Items.Count; ++i)
+                {
+                    checkedListBoxAlongId.SetItemChecked(i, true);
+                }
+            }
+            if (tabControl.SelectedIndex == 2)
+            {
+                for (int i = 0; i < checkedListBoxXT.Items.Count; ++i)
+                {
+                    checkedListBoxXT.SetItemChecked(i, true);
+                }
+            }
+        }
+
+        private void ochistitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedIndex == 0)
+            {
+                for (int i = 0; i < checkedListBoxTime.Items.Count; ++i)
+                {
+                    checkedListBoxTime.SetItemChecked(i, false);
+                }
+            }
+            if (tabControl.SelectedIndex == 1)
+            {
+                for (int i = 0; i < checkedListBoxAlongId.Items.Count; ++i)
+                {
+                    checkedListBoxAlongId.SetItemChecked(i, false);
+                }
+            }
+            if (tabControl.SelectedIndex == 2)
+            {
+                for (int i = 0; i < checkedListBoxXT.Items.Count; ++i)
+                {
+                    checkedListBoxXT.SetItemChecked(i, false);
+                }
+            }
+        }
+
+        private void iDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(lineTypeToolStripMenuItem.Checked == true)
+            {
+                lineTypeToolStripMenuItem.Checked = false;
+                iDToolStripMenuItem.Checked = true;
+                checkedListBoxAlongId.Items.Clear();
+                checkedListBoxXT.Items.Clear();
+                Dictionary<string, string> dict = new Dictionary<string, string>();
+                foreach (DataNodeLine i in controller.getLineType())
+                {
+                    dict.Add(i.reduction, i.name);
+                }
+
+                FileStream fileID = new FileStream(dir + "/AlongID_XT/ID", FileMode.Open, FileAccess.Read);
+                StreamReader readerID = new StreamReader(fileID);
+                while (!readerID.EndOfStream)
+                {
+                    string str = readerID.ReadLine();
+                    string[] tmp = str.Split(new char[] { ' ' });
+                    var arr = new ArrayList();
+                    foreach (string s in tmp)
+                    {
+                        if (s.Trim() != "")
+                        {
+                            arr.Add(s);
+                        }
+                    }
+                    string res = arr[0].ToString() + " " + dict[arr[1].ToString()];
+                    checkedListBoxAlongId.Items.Add(res);
+                    checkedListBoxXT.Items.Add(res);
+                }
+                readerID.Close();
+                fileID.Close();
+            }
+        }
+
+        private void lineTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(iDToolStripMenuItem.Checked == true)
+            {
+                iDToolStripMenuItem.Checked = false;
+                lineTypeToolStripMenuItem.Checked = true;
+
+                ArrayList list = new ArrayList();
+                foreach(string i in checkedListBoxAlongId.Items)
+                {
+                    list.Add(i);
+                }
+                checkedListBoxAlongId.Items.Clear();
+                checkedListBoxXT.Items.Clear();
+                MYComparer comp = new MYComparer();
+                list.Sort(comp);
+                foreach(var i in list)
+                {
+                    checkedListBoxAlongId.Items.Add(i);
+                    checkedListBoxXT.Items.Add(i);
+                }
+
+            }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var openForm = new Open(this);
+            openForm.Show();
+        }
+
+        private void parseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var parseForm = new Parse(this);
+            parseForm.Show();
+        }
+
+        /*private void buttonPlotCX_Click(object sender, EventArgs e)
+        {
+            if(checkedListBoxCX.CheckedItems.Count != 0)
+            {
+                double argv = ((double)(numericUpDownCX.Value));
+                controller.ParseCX(argv);
+            }
+        }*/
+      /*  private void tab1_Click(object sender, EventArgs e)
+        {
+            sortingToolStripMenuItem.Enabled = false;
+        }
+        private void tab2_Click(object sender, EventArgs e)
+        {
+            sortingToolStripMenuItem.Enabled = true;
+        }
+        private void tab3_Click(object sender, EventArgs e)
+        {
+            sortingToolStripMenuItem.Enabled = true;
+        }*/
+    }
+    public class MYComparer : IComparer
+    {
+
+        // Calls CaseInsensitiveComparer.Compare with the parameters reversed.
+        int IComparer.Compare(Object x, Object y)
+        {
+            string tmp = (string)x;
+            string a = "";
+            for(int i = 0; i < tmp.Length; ++i)
+            {
+                if (tmp[i] == '0' || tmp[i] == '1' || tmp[i] == '2' || tmp[i] == '3' || tmp[i] == '4' ||
+                    tmp[i] == '5' || tmp[i] == '6' || tmp[i] == '7' || tmp[i] == '8' || tmp[i] == '9' || tmp[i] == ' ')
+                {
+                    continue;
+                }
+                else
+                {
+                    a += tmp[i];
+                }
+            }
+            tmp = (string)y;
+            string b = "";
+            for (int i = 0; i < tmp.Length; ++i)
+            {
+                if (tmp[i] == '0' || tmp[i] == '1' || tmp[i] == '2' || tmp[i] == '3' || tmp[i] == '4' ||
+                    tmp[i] == '5' || tmp[i] == '6' || tmp[i] == '7' || tmp[i] == '8' || tmp[i] == '9' || tmp[i] == ' ')
+                {
+                    continue;
+                }
+                else
+                {
+                    b += tmp[i];
+                }
+            }
+            return string.Compare(a, b);
+        }
+
     }
 }

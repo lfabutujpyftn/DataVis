@@ -33,13 +33,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Controller">
-      <HintPath>..\Controller\bin\Debug\Controller.dll</HintPath>
+      <HintPath>..\Controller\bin\Release\Controller.dll</HintPath>
     </Reference>
     <Reference Include="Parser">
-      <HintPath>..\Parser\bin\Debug\Parser.dll</HintPath>
+      <HintPath>..\Parser\bin\Release\Parser.dll</HintPath>
     </Reference>
     <Reference Include="Plotter">
-      <HintPath>..\Plotter\bin\Debug\Plotter.dll</HintPath>
+      <HintPath>..\Plotter\bin\Release\Plotter.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,16 +53,10 @@
     <Reference Include="System.Xml" />
     <Reference Include="Tuner, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Tuner\bin\Debug\Tuner.dll</HintPath>
+      <HintPath>..\Tuner\bin\Release\Tuner.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Load.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Load.Designer.cs">
-      <DependentUpon>Load.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,9 +77,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Load.resx">
-      <DependentUpon>Load.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

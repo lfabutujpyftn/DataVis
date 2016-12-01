@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.IO;
 using System.Collections;
+using System.Globalization;
 
 namespace Tuner
 {
@@ -37,12 +38,27 @@ namespace Tuner
     {
         public ArrayList columFGRGtun;
         public ArrayList typeLineTun;
-        public CTuner()
+        public string dir;
+        public string o;
+        public CTuner(string dir, string o)
         {
             columFGRGtun = new ArrayList();
             typeLineTun = new ArrayList();
+            this.dir = dir;
+            this.o = o;
             initDirectory();
-            initColumnFGRG();
+            createFGRGTUN(o);
+           // initColumnFGRG();
+            initTypeLine();
+        }
+
+        public CTuner(string dir)
+        {
+            columFGRGtun = new ArrayList();
+            typeLineTun = new ArrayList();
+            this.dir = dir;
+            initDirectory();
+           // initColumnFGRG();
             initTypeLine();
         }
 
@@ -51,10 +67,50 @@ namespace Tuner
             if (!Directory.Exists("./Setting"))
             {
                 Directory.CreateDirectory("./Setting");
+            } 
+            if (!Directory.Exists(dir + "/Setting"))
+            {
+                Directory.CreateDirectory(dir + "/Setting");
             }
         }
 
-        public void initColumnFGRG()
+        public void createFGRGTUN(string o)
+        {
+            FileStream file = new FileStream(dir + "/Setting/FGRG.tun", FileMode.Create);
+            FileStream fileo = new FileStream(o, FileMode.Open);
+            StreamWriter filewr = new StreamWriter(file);
+            StreamReader fileord = new StreamReader(fileo, System.Text.Encoding.Default);
+            while(!fileord.EndOfStream)
+            {
+                string str = fileord.ReadLine();
+               // Console.WriteLine(str);
+                string[] tmp = str.Split(new char[] { '\'' });
+                ArrayList arr = new ArrayList();
+                foreach (string s in tmp)
+                {
+                    arr.Add(s);
+                }
+                /*foreach(string s in arr)
+                {
+                    Console.Write("!" + s+ "!");
+                }*/
+                string res = "";
+                res += arr[1] + " ";
+                if (((string)arr[arr.Count - 2]).Trim() == "")
+                    res += "служебный";
+                else
+                    res += arr[arr.Count - 2];
+                res += " " + arr[3];
+                filewr.WriteLine(res);
+                Console.WriteLine(res);
+            }
+            fileord.Close();
+            filewr.Close();
+            file.Close();
+            fileo.Close();
+        }
+
+       /* public void initColumnFGRG()
         {
             if(!File.Exists("./Setting/FGRG.tun"))
             {
@@ -76,7 +132,7 @@ namespace Tuner
 
                 filewr.Close();
             }
-        }
+        }*/
 
         public void initTypeLine()
         {
@@ -104,35 +160,9 @@ namespace Tuner
             }
         }
 
-        public void addColumn(string reduction, string measure, string name)
-        {
-            FileStream file = new FileStream("./Setting/FGRG.tun", FileMode.Append);
-            StreamWriter filewr = new StreamWriter(file);
-            filewr.WriteLine(reduction + " " + measure + " " + name);
-            filewr.Close();
-        }
-
-        public void rmColumn(string name)
-        {
-
-        }
-
-        public void addTypeLine(int number, string name)
-        {
-            FileStream file = new FileStream("./Setting/TypeLine.tun", FileMode.Append);
-            StreamWriter filewr = new StreamWriter(file);
-            filewr.WriteLine(number.ToString() + " " + name);
-            filewr.Close();
-        }
-
-        public void rmTypeLine()
-        {
-
-        }
-
         public void TunColums()
         {
-            FileStream file = new FileStream("./Setting/FGRG.tun", FileMode.Open, FileAccess.Read);
+            FileStream file = new FileStream(dir + "/Setting/FGRG.tun", FileMode.Open, FileAccess.Read);
             StreamReader reader = new StreamReader(file);
             while (!reader.EndOfStream)
             {
@@ -220,7 +250,7 @@ namespace Tuner
     {
         static void Main()
         {
-            var tun = new CTuner();
+            var tun = new CTuner("./as", "C:/Владимир/Учеба/Универ/Диплом/testdata/o_grg");
             tun.TUN();
             tun.printTun();
         }

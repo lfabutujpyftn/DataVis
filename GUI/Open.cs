@@ -12,9 +12,9 @@ namespace GUI
 {
     public partial class Open : Form
     {
-        private Form main;
+        private MainForm main;
         private string dir;
-        public Open(Form f)
+        public Open(MainForm f)
         {
             InitializeComponent();
             main = f;
@@ -28,8 +28,8 @@ namespace GUI
         {
             if (dir != "")
             {
-                var mainForm = new MainForm(main, dir);
-                mainForm.Show();
+                main.init(dir);
+                main.Enabled = true;
                 this.Close();
             }
         }

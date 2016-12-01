@@ -38,6 +38,9 @@
             this.textBoxDir = new System.Windows.Forms.TextBox();
             this.buttonDir = new System.Windows.Forms.Button();
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxO = new System.Windows.Forms.TextBox();
+            this.buttonO = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxD
@@ -56,7 +59,7 @@
             // 
             // buttonD
             // 
-            this.buttonD.Location = new System.Drawing.Point(363, 9);
+            this.buttonD.Location = new System.Drawing.Point(363, 10);
             this.buttonD.Name = "buttonD";
             this.buttonD.Size = new System.Drawing.Size(75, 23);
             this.buttonD.TabIndex = 2;
@@ -66,7 +69,7 @@
             // 
             // buttonF
             // 
-            this.buttonF.Location = new System.Drawing.Point(364, 35);
+            this.buttonF.Location = new System.Drawing.Point(363, 36);
             this.buttonF.Name = "buttonF";
             this.buttonF.Size = new System.Drawing.Size(75, 23);
             this.buttonF.TabIndex = 3;
@@ -76,7 +79,7 @@
             // 
             // buttonParse
             // 
-            this.buttonParse.Location = new System.Drawing.Point(364, 90);
+            this.buttonParse.Location = new System.Drawing.Point(363, 116);
             this.buttonParse.Name = "buttonParse";
             this.buttonParse.Size = new System.Drawing.Size(75, 23);
             this.buttonParse.TabIndex = 4;
@@ -90,14 +93,14 @@
             // 
             // textBoxDir
             // 
-            this.textBoxDir.Location = new System.Drawing.Point(12, 64);
+            this.textBoxDir.Location = new System.Drawing.Point(12, 90);
             this.textBoxDir.Name = "textBoxDir";
             this.textBoxDir.Size = new System.Drawing.Size(345, 20);
             this.textBoxDir.TabIndex = 5;
             // 
             // buttonDir
             // 
-            this.buttonDir.Location = new System.Drawing.Point(363, 61);
+            this.buttonDir.Location = new System.Drawing.Point(363, 88);
             this.buttonDir.Name = "buttonDir";
             this.buttonDir.Size = new System.Drawing.Size(75, 23);
             this.buttonDir.TabIndex = 6;
@@ -107,16 +110,43 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(12, 90);
+            this.progressBar.Location = new System.Drawing.Point(12, 116);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(345, 23);
             this.progressBar.TabIndex = 7;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(12, 145);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(426, 20);
+            this.textBox1.TabIndex = 8;
+            // 
+            // textBoxO
+            // 
+            this.textBoxO.Location = new System.Drawing.Point(12, 64);
+            this.textBoxO.Name = "textBoxO";
+            this.textBoxO.Size = new System.Drawing.Size(345, 20);
+            this.textBoxO.TabIndex = 9;
+            // 
+            // buttonO
+            // 
+            this.buttonO.Location = new System.Drawing.Point(363, 62);
+            this.buttonO.Name = "buttonO";
+            this.buttonO.Size = new System.Drawing.Size(75, 23);
+            this.buttonO.TabIndex = 10;
+            this.buttonO.Text = "Choose";
+            this.buttonO.UseVisualStyleBackColor = true;
+            this.buttonO.Click += new System.EventHandler(this.buttonO_Click);
             // 
             // Parse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(448, 123);
+            this.ClientSize = new System.Drawing.Size(448, 173);
+            this.Controls.Add(this.buttonO);
+            this.Controls.Add(this.textBoxO);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.buttonDir);
             this.Controls.Add(this.textBoxDir);
@@ -125,12 +155,12 @@
             this.Controls.Add(this.buttonD);
             this.Controls.Add(this.textBoxF);
             this.Controls.Add(this.textBoxD);
-            this.MaximumSize = new System.Drawing.Size(464, 162);
-            this.MinimumSize = new System.Drawing.Size(464, 162);
+            this.MaximumSize = new System.Drawing.Size(464, 212);
+            this.MinimumSize = new System.Drawing.Size(464, 212);
             this.Name = "Parse";
             this.Text = "Parse";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Open_Closing);
             this.Load += new System.EventHandler(this.Parse_Load);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Parse_Closing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -148,5 +178,8 @@
         private System.Windows.Forms.TextBox textBoxDir;
         private System.Windows.Forms.Button buttonDir;
         private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxO;
+        private System.Windows.Forms.Button buttonO;
     }
 }

@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GNUPlot">
-      <HintPath>..\GNUPlot\bin\Debug\GNUPlot.dll</HintPath>
+      <HintPath>..\GNUPlot\bin\Release\GNUPlot.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
