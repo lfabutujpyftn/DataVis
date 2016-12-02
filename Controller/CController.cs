@@ -9,6 +9,7 @@ using System.Collections;
 using Plot;
 using System.IO;
 using System.Globalization;
+using System.Windows.Forms;
 
 namespace Controller
 {
@@ -35,7 +36,7 @@ namespace Controller
             parser = new CParser(d, f, dir, tuner.columFGRGtun, tuner.typeLineTun);
            // parser.ParseConstT();
             //parser.ParseConstXall();
-           // parser.ParseAlongID_XT();
+            parser.ParseAlongID_XT();
             //parser.ParseXT();
             //parser.Parse();
             plt = new Plot.Plot();
@@ -56,6 +57,8 @@ namespace Controller
             //parser.Parse();
             plt = new Plot.Plot();
         }
+
+        
         public void ParseCT()
         {
             parser.ParseConstT();
@@ -110,7 +113,7 @@ namespace Controller
                 if(s2 != reduct[0].ToString())
                     variable += ", " + s2;
             }
-            plt.XTitle = "x";
+            plt.XTitle = "X";
             plt.YTitle = variable;
             plt.DrawFiles(fileList, titleList);
         }
@@ -163,6 +166,7 @@ namespace Controller
             {
                 if (data.measure != "служебный")
                     dictFGRGCOL.Add(data.reduction, tmpi);
+                tmpi++;
             }
             int flagi = 0;
             foreach (string id in idline)
@@ -202,6 +206,7 @@ namespace Controller
             ArrayList fileList = new ArrayList();
             ArrayList titleList = new ArrayList();
             variable = reduct[0].ToString();
+           // string mes = "";
             foreach (string s2 in reduct)
             {
                 tmpi = 0;
@@ -209,11 +214,13 @@ namespace Controller
                 {
                     fileList.Add(dir + "/AlongID/" + s + "_" + numline[tmpi] + "_t_" + s2);
                     titleList.Add(s2 + ", " + dict2[numline[tmpi].ToString()] + ", ID=" + s);
+              //      mes += "/AlongID/" + s + "_" + numline[tmpi] + "_t_" + s2 + " # ";
                     tmpi++;
                 }
                 if (s2 != reduct[0].ToString())
                     variable += ", " + s2;
             }
+           // MessageBox.Show(mes);
             plt.XTitle = "t";
             plt.YTitle = variable;
             plt.DrawFiles(fileList, titleList);
@@ -283,7 +290,7 @@ namespace Controller
                                 arr.Add(s);
                             }
                         }
-                        outWriter.WriteLine(arr[dictFGRGCOL["x"]] + " " + arr[0]);
+                        outWriter.WriteLine(arr[dictFGRGCOL["X"]] + " " + arr[0]);
                     }
                     inReader.Close();
                     inFile.Close();
@@ -303,7 +310,7 @@ namespace Controller
                 titleList.Add(dict2[numline[tmpi].ToString()] + ", ID=" + s);
                 tmpi++; 
             }
-            plt.XTitle = "x";
+            plt.XTitle = "X";
             plt.YTitle = variable;
             plt.DrawFiles(fileList, titleList);
         }
@@ -311,17 +318,50 @@ namespace Controller
         {
             set { plt.Legend = value; }
         }
+
+        public bool Autoscale
+        {
+            set { plt.Autoscale = value; }
+        }
+
+        public bool XRange
+        {
+            set { plt.XRange = value; }
+        }
+        public double XTo
+        {
+            set { plt.XTo = value; }
+        }
+
+        public double XFrom
+        {
+            set { plt.XFrom = value; }
+        }
+
+        public bool YRange
+        {
+            set { plt.YRange = value; }
+        }
+        public double YTo
+        {
+            set { plt.YTo = value; }
+        }
+
+        public double YFrom
+        {
+            set { plt.YFrom = value; }
+        }
     }
-   /* public class Test
+    public class Test
     {
         static void Main()
         {
             System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Console.WriteLine(CultureInfo.CurrentCulture.ToString());
             Console.WriteLine("hi");
-            var contr = new CController("C:\\Games\\git\\DataVis\\d_grg.rez",
-                "C:\\Games\\git\\DataVis\\f_grg.rez",
-                "C:\\AAAA");
+            var contr = new CController("C:\\Владимир\\Учеба\\Универ\\Диплом\\testdata\\d_grg",
+                "C:\\Владимир\\Учеба\\Универ\\Диплом\\testdata\\f_grg", "C:\\Владимир\\Учеба\\Универ\\Диплом\\testdata\\o_grg",
+                "C:\\atmp");
         }
-    }*/
+    }
 }

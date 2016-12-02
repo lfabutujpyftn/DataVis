@@ -125,8 +125,8 @@ namespace GUI
             textBox1.Text = "Parse along ID and XT diagram data";
             mainform.controller.ParseAID_XT();
             progressBar.Value += 100 / 3;
-            textBox1.Text = "Parse const x diagram data";
-            mainform.controller.ParseCX();
+            //textBox1.Text = "Parse const x diagram data";
+            //mainform.controller.ParseCX();
             progressBar.Value += 100 / 3;
             buttonParse.Text = "Start";
             this.parse = true;

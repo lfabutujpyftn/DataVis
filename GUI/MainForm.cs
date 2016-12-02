@@ -26,11 +26,25 @@ namespace GUI
         public string fgrg;
         public string ogrg;
         bool legend;
+        bool autoscale;
+        public bool xrange;
+        public double xfrom;
+        public double xto;
+        public bool yrange;
+        public double yfrom;
+        public double yto;
 
         public MainForm()
         {
             InitializeComponent();
             legend = false;
+            autoscale = true;
+            xrange = false;
+            xfrom = 0;
+            xto = 1;
+            yrange = false;
+            yfrom = 0;
+            yto = 1;
         }
 
         public void init(string dir)
@@ -70,7 +84,7 @@ namespace GUI
             
             foreach(DataNode s in controller.getColums())
             {
-                if(s.reduction != "x")
+                if(s.reduction != "X")
                     if (s.measure != "служебный")
                     {
                         checkedListBoxColoms.Items.Add(s.reduction + " " + s.name);
@@ -92,7 +106,12 @@ namespace GUI
             {
                 dict.Add(i.reduction, i.name);
             }
-
+            string g = "";
+            foreach(var i in dict)
+            {
+                g += i.Key + " ";
+            }
+            //MessageBox.Show(g);
             FileStream fileID = new FileStream(dir + "/AlongID_XT/ID", FileMode.Open, FileAccess.Read);
             StreamReader readerID = new StreamReader(fileID);
             while (!readerID.EndOfStream)
@@ -107,6 +126,7 @@ namespace GUI
                         arr.Add(s);
                     }
                 }
+                //MessageBox.Show(arr[1].ToString());
                 string res = arr[0].ToString() + " " + dict[arr[1].ToString()];
                 checkedListBoxAlongId.Items.Add(res);
                 checkedListBoxXT.Items.Add(res);
@@ -161,11 +181,14 @@ namespace GUI
                     wID.WriteLine(s);
                     ID.Add(s);
                 }
+               // string col = "";
                 foreach (string s in checkedListBoxColAlongId.CheckedItems)
                 {
                     wID.WriteLine(s);
                     coloms.Add(s);
+                //    col += s;
                 }
+               // MessageBox.Show(col);
                 wID.Close();
                 fileID.Close();
                 controller.PlotSelectItemAlongID(ID, coloms);
@@ -329,6 +352,55 @@ namespace GUI
         {
             var parseForm = new Parse(this);
             parseForm.Show();
+        }
+
+        public void autoscaleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (autoscaleToolStripMenuItem.Checked)
+            {
+                autoscaleToolStripMenuItem.Checked = false;
+                autoscale = false;
+            }
+            else
+            {
+                autoscaleToolStripMenuItem.Checked = true;
+                autoscale = true;
+            }
+            controller.Autoscale = autoscale;
+        }
+
+        private void xrangeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(xrangeToolStripMenuItem.Checked == true)
+            {
+                xrange = false;
+                controller.XRange = false;
+                xrangeToolStripMenuItem.Checked = false;
+                autoscaleToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                Form xr = new XRange(this, xfrom, xto);
+                this.Enabled = false;
+                xr.Show();
+            }
+        }
+
+        private void yrangeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (yrangeToolStripMenuItem.Checked == true)
+            {
+                yrange = false;
+                controller.YRange = false;
+                yrangeToolStripMenuItem.Checked = false;
+                autoscaleToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                Form yr = new YRange(this, yfrom, yto);
+                this.Enabled = false;
+                yr.Show();
+            }
         }
 
         /*private void buttonPlotCX_Click(object sender, EventArgs e)

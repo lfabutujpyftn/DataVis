@@ -92,16 +92,17 @@ namespace Parser
                         ++i;
                     }
                 }
+                
                 if (flag == "0")
                 {
-                    Console.WriteLine("num: " + num + " t: " + t + " dt: " + dt + " st: " + start + " fin: " + finish + " fl: " + flag);
+                    //Console.WriteLine("num: " + num + " t: " + t + " dt: " + dt + " st: " + start + " fin: " + finish + " fl: " + flag);
                     writerT.WriteLine(t);
                     FileStream[] files = new FileStream[dict.Count - 1];
                     Dictionary<string, int> dict2 = new Dictionary<string, int>();
                     int tmp3 = 0;
                     foreach(var iter in dict)
                     {
-                        if(iter.Key != "X" || iter.Key != "x")
+                        if(iter.Key != "X")
                         {
                             files[tmp3] = new FileStream(dir + "/ConstT/" + t + "_x_" + iter.Key, FileMode.Create, FileAccess.Write);
                             dict2.Add(iter.Key, tmp3);
@@ -130,7 +131,7 @@ namespace Parser
                         }
                         foreach(var iter in dict2)
                         {
-                            writers[iter.Value].WriteLine(arr[dict["x"]] + " " + arr[dict[iter.Key]]);
+                            writers[iter.Value].WriteLine(arr[dict["X"]] + " " + arr[dict[iter.Key]]);
                         }
 
                     }
@@ -173,7 +174,7 @@ namespace Parser
             double max = 0;
             foreach (DataNode data in columsTun)
             {
-                if (data.reduction == "x")
+                if (data.reduction == "X")
                     xcolom = tmpi;
                 tmpi++;
             }
@@ -222,7 +223,7 @@ namespace Parser
             int xcolom = 0;
             foreach (DataNode data in columsTun)
             {
-                if (data.reduction == "x")
+                if (data.reduction == "X")
                     xcolom = tmpi;
                 tmpi++;
             }
@@ -306,7 +307,7 @@ namespace Parser
             {
                 if (data.reduction == "ID")
                     IDcolom = tmpi;
-                if (data.reduction == "type")
+                if (data.reduction == "TL")
                 {
                     typeColom = tmpi;
                 }
@@ -316,7 +317,7 @@ namespace Parser
             Console.WriteLine(typeColom);
            /* foreach (var i in dict)
             {
-                if (i.Key != "x")
+                if (i.Key != "X")
                     dictWOX.Add(i.Key, i.Value);
                 Console.WriteLine(i.Key + " " + i.Value);
             }*/

@@ -10,7 +10,7 @@ namespace AwokeKnowing.GnuplotCSharp
 {
     public class GnuPlot
     {
-        public static string PathToGnuplot = @"C:\Program Files\gnuplot\bin";
+        public static string PathToGnuplot;
         private static Process ExtPro;
         private static StreamWriter GnupStWr;
         private static List<StoredPlot> PlotBuffer;
@@ -21,6 +21,7 @@ namespace AwokeKnowing.GnuplotCSharp
 
         static GnuPlot()
         {
+            PathToGnuplot = @"C:\Program Files\gnuplot\bin";
             if (PathToGnuplot[PathToGnuplot.Length - 1].ToString() != @"\")
                 PathToGnuplot += @"\";
             ExtPro = new Process();

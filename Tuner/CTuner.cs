@@ -7,6 +7,7 @@ using System.Xml;
 using System.IO;
 using System.Collections;
 using System.Globalization;
+using System.Windows.Forms;
 
 namespace Tuner
 {
@@ -245,6 +246,10 @@ namespace Tuner
                 Console.WriteLine(d.reduction + " " + d.name);
             }
         }
+
+       
+
+        
     }
     public class Test
     {

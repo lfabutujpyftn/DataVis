@@ -19,3 +19,5 @@ C:\Games\git\DataVis\GUI\obj\Release\GUI.Properties.Resources.resources
 C:\Games\git\DataVis\GUI\obj\Release\GUI.csproj.GenerateResource.Cache
 C:\Games\git\DataVis\GUI\obj\Release\GUI.exe
 C:\Games\git\DataVis\GUI\obj\Release\GUI.pdb
+C:\Games\git\DataVis\GUI\obj\Release\GUI.XRange.resources
+C:\Games\git\DataVis\GUI\obj\Release\GUI.YRange.resources

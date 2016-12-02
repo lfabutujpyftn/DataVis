@@ -77,6 +77,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="YRange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YRange.Designer.cs">
+      <DependentUpon>YRange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XRange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="XRange.Designer.cs">
+      <DependentUpon>XRange.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -95,6 +107,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="YRange.resx">
+      <DependentUpon>YRange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XRange.resx">
+      <DependentUpon>XRange.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

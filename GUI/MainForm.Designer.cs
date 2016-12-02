@@ -49,9 +49,13 @@
             this.sortingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lineTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoscaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xrangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videlitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videlitallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ochistitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.yrangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -219,14 +223,14 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // parseToolStripMenuItem
             // 
             this.parseToolStripMenuItem.Name = "parseToolStripMenuItem";
-            this.parseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.parseToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.parseToolStripMenuItem.Text = "Parse";
             this.parseToolStripMenuItem.Click += new System.EventHandler(this.parseToolStripMenuItem_Click);
             // 
@@ -234,7 +238,8 @@
             // 
             this.settingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.legendToolStripMenuItem,
-            this.sortingToolStripMenuItem});
+            this.sortingToolStripMenuItem,
+            this.rangeToolStripMenuItem});
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
             this.settingToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.settingToolStripMenuItem.Text = "Setting";
@@ -242,7 +247,7 @@
             // legendToolStripMenuItem
             // 
             this.legendToolStripMenuItem.Name = "legendToolStripMenuItem";
-            this.legendToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.legendToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.legendToolStripMenuItem.Text = "Legend";
             this.legendToolStripMenuItem.Click += new System.EventHandler(this.legendToolStripMenuItem_Click);
             // 
@@ -252,7 +257,7 @@
             this.iDToolStripMenuItem,
             this.lineTypeToolStripMenuItem});
             this.sortingToolStripMenuItem.Name = "sortingToolStripMenuItem";
-            this.sortingToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.sortingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sortingToolStripMenuItem.Text = "Sorting";
             // 
             // iDToolStripMenuItem
@@ -270,6 +275,32 @@
             this.lineTypeToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.lineTypeToolStripMenuItem.Text = "Line type";
             this.lineTypeToolStripMenuItem.Click += new System.EventHandler(this.lineTypeToolStripMenuItem_Click);
+            // 
+            // rangeToolStripMenuItem
+            // 
+            this.rangeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.autoscaleToolStripMenuItem,
+            this.xrangeToolStripMenuItem,
+            this.yrangeToolStripMenuItem});
+            this.rangeToolStripMenuItem.Name = "rangeToolStripMenuItem";
+            this.rangeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rangeToolStripMenuItem.Text = "Range";
+            // 
+            // autoscaleToolStripMenuItem
+            // 
+            this.autoscaleToolStripMenuItem.Checked = true;
+            this.autoscaleToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.autoscaleToolStripMenuItem.Name = "autoscaleToolStripMenuItem";
+            this.autoscaleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.autoscaleToolStripMenuItem.Text = "Autoscale";
+            this.autoscaleToolStripMenuItem.Click += new System.EventHandler(this.autoscaleToolStripMenuItem_Click);
+            // 
+            // xrangeToolStripMenuItem
+            // 
+            this.xrangeToolStripMenuItem.Name = "xrangeToolStripMenuItem";
+            this.xrangeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.xrangeToolStripMenuItem.Text = "Xrange";
+            this.xrangeToolStripMenuItem.Click += new System.EventHandler(this.xrangeToolStripMenuItem_Click);
             // 
             // videlitToolStripMenuItem
             // 
@@ -293,6 +324,13 @@
             this.ochistitToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.ochistitToolStripMenuItem.Text = "Clean all";
             this.ochistitToolStripMenuItem.Click += new System.EventHandler(this.ochistitToolStripMenuItem_Click);
+            // 
+            // yrangeToolStripMenuItem
+            // 
+            this.yrangeToolStripMenuItem.Name = "yrangeToolStripMenuItem";
+            this.yrangeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.yrangeToolStripMenuItem.Text = "Yrange";
+            this.yrangeToolStripMenuItem.Click += new System.EventHandler(this.yrangeToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -343,6 +381,10 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem parseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rangeToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem autoscaleToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem xrangeToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem yrangeToolStripMenuItem;
     }
 }
 

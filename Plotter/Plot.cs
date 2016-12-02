@@ -16,16 +16,62 @@ namespace Plot
         private string _yTitle;
         private string _title;
         private bool legend;
+        private bool autoscale;
+        private bool xrange;
+        private double xfrom;
+        private double xto;
+        private bool yrange;
+        private double yfrom;
+        private double yto;
         /*public Color Color 
         {
             get { return _color;}
             set { _color = value;}
         }*/
+        public double XFrom
+        {
+            get { return xfrom; }
+            set { xfrom = value; }
+        }
 
+        public double XTo
+        {
+            get { return xto; }
+            set { xto = value; }
+        }
+
+        public double YFrom
+        {
+            get { return yfrom; }
+            set { yfrom = value; }
+        }
+
+        public double YTo
+        {
+            get { return yto; }
+            set { yto = value; }
+        }
         public bool Legend
         {
             get { return legend; }
             set { legend = value; }
+        }
+
+        public bool Autoscale
+        {
+            get { return autoscale; }
+            set { autoscale = value; }
+        }
+
+        public bool XRange
+        {
+            get { return xrange; }
+            set { xrange = value; }
+        }
+        public bool YRange
+        {
+            get { return yrange; }
+            set { yrange = value; }
         }
         public string Color
         {
@@ -62,6 +108,9 @@ namespace Plot
             _drawType = global::Plot.DrawType.Lines;
             _color = "000000";
             legend = false;
+            autoscale = true;
+            xrange = false;
+            yrange = false;
         }
         private string _GetParam()
         {
@@ -92,9 +141,6 @@ namespace Plot
 
         private string _GetParam(string title)
         {
-            AwokeKnowing.GnuplotCSharp.GnuPlot.Set("xlabel \"" + _xTitle + "\"");
-            AwokeKnowing.GnuplotCSharp.GnuPlot.Set("ylabel \"" + _yTitle + "\"");
-            AwokeKnowing.GnuplotCSharp.GnuPlot.Set("autoscale");
             string par = "using 1:2 ";
             if (legend)
                 par += "title \"" + title + "\"";
@@ -117,6 +163,14 @@ namespace Plot
         }
         public void DrawFiles(ArrayList filePath, ArrayList titles)
         {
+            AwokeKnowing.GnuplotCSharp.GnuPlot.Set("xlabel \"" + _xTitle + "\"");
+            AwokeKnowing.GnuplotCSharp.GnuPlot.Set("ylabel \"" + _yTitle + "\"");
+            if(autoscale == true)
+                AwokeKnowing.GnuplotCSharp.GnuPlot.Set("autoscale");
+            if(xrange == true)
+                AwokeKnowing.GnuplotCSharp.GnuPlot.Set("xrange [" + xfrom.ToString().Replace(',', '.') + ":" + xto.ToString().Replace(',', '.') + "]");
+            if (yrange == true)
+                AwokeKnowing.GnuplotCSharp.GnuPlot.Set("yrange [" + yfrom.ToString().Replace(',', '.') + ":" + yto.ToString().Replace(',', '.') + "]");
             Console.WriteLine("Start draw file \"" + filePath + "\"");
             ArrayList param = new ArrayList();
             foreach(string s in titles)
