@@ -30,6 +30,8 @@
         {
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.buttonFind = new System.Windows.Forms.Button();
+            this.textBoxFind = new System.Windows.Forms.TextBox();
             this.buttonPlotCT = new System.Windows.Forms.Button();
             this.checkedListBoxTime = new System.Windows.Forms.CheckedListBox();
             this.checkedListBoxColoms = new System.Windows.Forms.CheckedListBox();
@@ -56,8 +58,7 @@
             this.videlitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videlitallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ochistitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBoxFind = new System.Windows.Forms.TextBox();
-            this.buttonFind = new System.Windows.Forms.Button();
+            this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -79,6 +80,7 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(467, 281);
             this.tabControl.TabIndex = 0;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndCha);
             // 
             // tabPage1
             // 
@@ -94,6 +96,25 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Const T";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // buttonFind
+            // 
+            this.buttonFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonFind.Location = new System.Drawing.Point(127, 227);
+            this.buttonFind.Name = "buttonFind";
+            this.buttonFind.Size = new System.Drawing.Size(75, 23);
+            this.buttonFind.TabIndex = 5;
+            this.buttonFind.Text = "Find";
+            this.buttonFind.UseVisualStyleBackColor = true;
+            this.buttonFind.Click += new System.EventHandler(this.buttonFind_Click);
+            // 
+            // textBoxFind
+            // 
+            this.textBoxFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBoxFind.Location = new System.Drawing.Point(3, 229);
+            this.textBoxFind.Name = "textBoxFind";
+            this.textBoxFind.Size = new System.Drawing.Size(118, 20);
+            this.textBoxFind.TabIndex = 4;
             // 
             // buttonPlotCT
             // 
@@ -317,7 +338,8 @@
             // 
             this.videlitToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.videlitallToolStripMenuItem,
-            this.ochistitToolStripMenuItem});
+            this.ochistitToolStripMenuItem,
+            this.selectToolStripMenuItem});
             this.videlitToolStripMenuItem.Name = "videlitToolStripMenuItem";
             this.videlitToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.videlitToolStripMenuItem.Text = "Selecting";
@@ -325,33 +347,23 @@
             // videlitallToolStripMenuItem
             // 
             this.videlitallToolStripMenuItem.Name = "videlitallToolStripMenuItem";
-            this.videlitallToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.videlitallToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.videlitallToolStripMenuItem.Text = "Select all";
             this.videlitallToolStripMenuItem.Click += new System.EventHandler(this.videlitallToolStripMenuItem_Click);
             // 
             // ochistitToolStripMenuItem
             // 
             this.ochistitToolStripMenuItem.Name = "ochistitToolStripMenuItem";
-            this.ochistitToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.ochistitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ochistitToolStripMenuItem.Text = "Clean all";
             this.ochistitToolStripMenuItem.Click += new System.EventHandler(this.ochistitToolStripMenuItem_Click);
             // 
-            // textBoxFind
+            // selectToolStripMenuItem
             // 
-            this.textBoxFind.Location = new System.Drawing.Point(3, 229);
-            this.textBoxFind.Name = "textBoxFind";
-            this.textBoxFind.Size = new System.Drawing.Size(118, 20);
-            this.textBoxFind.TabIndex = 4;
-            // 
-            // buttonFind
-            // 
-            this.buttonFind.Location = new System.Drawing.Point(127, 227);
-            this.buttonFind.Name = "buttonFind";
-            this.buttonFind.Size = new System.Drawing.Size(75, 23);
-            this.buttonFind.TabIndex = 5;
-            this.buttonFind.Text = "Find";
-            this.buttonFind.UseVisualStyleBackColor = true;
-            this.buttonFind.Click += new System.EventHandler(this.buttonFind_Click);
+            this.selectToolStripMenuItem.Name = "selectToolStripMenuItem";
+            this.selectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.selectToolStripMenuItem.Text = "Select";
+            this.selectToolStripMenuItem.Click += new System.EventHandler(this.selectToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -379,18 +391,18 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl;
+        public System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.CheckedListBox checkedListBoxColoms;
         private System.Windows.Forms.CheckedListBox checkedListBoxTime;
         private System.Windows.Forms.Button buttonPlotCT;
-        private System.Windows.Forms.CheckedListBox checkedListBoxAlongId;
+        public System.Windows.Forms.CheckedListBox checkedListBoxAlongId;
         private System.Windows.Forms.Button buttonPlotAlongId;
         private System.Windows.Forms.CheckedListBox checkedListBoxColAlongId;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button buttonPlotXt;
-        private System.Windows.Forms.CheckedListBox checkedListBoxXT;
+        public System.Windows.Forms.CheckedListBox checkedListBoxXT;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem settingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem legendToolStripMenuItem;
@@ -409,6 +421,7 @@
         public System.Windows.Forms.ToolStripMenuItem yrangeToolStripMenuItem;
         private System.Windows.Forms.Button buttonFind;
         private System.Windows.Forms.TextBox textBoxFind;
+        private System.Windows.Forms.ToolStripMenuItem selectToolStripMenuItem;
     }
 }
 

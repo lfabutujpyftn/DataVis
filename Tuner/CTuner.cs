@@ -141,21 +141,21 @@ namespace Tuner
             {
                 FileStream file = new FileStream("./Setting/TypeLine.tun", FileMode.Create);
                 StreamWriter filewr = new StreamWriter(file);
-                filewr.WriteLine("1 левая стенка");
-                filewr.WriteLine("2 полевая точка");
-                filewr.WriteLine("4 правая стенка");
-                filewr.WriteLine("8 левый КР");
-                filewr.WriteLine("16 правый КР");
-                filewr.WriteLine("32 левая УВ");
-                filewr.WriteLine("64 правая УВ");
-                filewr.WriteLine("128 крайняя характеристика ВВР");
-                filewr.WriteLine("256 точка на хар-ке");
-                filewr.WriteLine("512 фиксированная точка");
-                filewr.WriteLine("1024 точка адаптивной сетки");
-                filewr.WriteLine("2048 левая входная граница");
-                filewr.WriteLine("4096 правая входная граница");
-                filewr.WriteLine("4608 атмосфера");
-                filewr.WriteLine("5120 камера сгорания");
+                filewr.WriteLine("1 Левая стенка");
+                filewr.WriteLine("2 Полевая точка");
+                filewr.WriteLine("4 Правая стенка");
+                filewr.WriteLine("8 Левый КР");
+                filewr.WriteLine("16 Правый КР");
+                filewr.WriteLine("32 Левая УВ");
+                filewr.WriteLine("64 Правая УВ");
+                filewr.WriteLine("128 Крайняя характеристика ВВР");
+                filewr.WriteLine("256 Точка на хар-ке");
+                filewr.WriteLine("512 Фиксированная точка");
+                filewr.WriteLine("1024 Точка адаптивной сетки");
+                filewr.WriteLine("2048 Левая входная граница");
+                filewr.WriteLine("4096 Правая входная граница");
+                filewr.WriteLine("4608 Атмосфера");
+                filewr.WriteLine("5120 Камера сгорания");
 
                 filewr.Close();
             }

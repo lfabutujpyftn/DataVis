@@ -39,5 +39,9 @@ namespace GUI
             }*/
             this.Close();
         }
+        private void YRange_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            f.Enabled = true;
+        }
     }
 }

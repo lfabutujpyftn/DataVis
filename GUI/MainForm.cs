@@ -47,6 +47,8 @@ namespace GUI
             yfrom = 0;
             yto = 1;
             findIndex = -1;
+            selectToolStripMenuItem.Enabled = false;
+            sortingToolStripMenuItem.Enabled = false;
         }
 
         public void init(string dir)
@@ -451,7 +453,7 @@ namespace GUI
         private void buttonFind_Click(object sender, EventArgs e)
         {
             string pattern = textBoxFind.Text;
-            if(pattern == "")
+            if(pattern == "") 
             {
                 MessageBox.Show("Empty pattern");
                 return;
@@ -462,13 +464,38 @@ namespace GUI
                     c != '6' && c != '7' && c != '8' && c != '9' && c != '+' && c != '-' && c != 'E' && c != 'e'
                     && c != '.' && c != ',')
                 {
-                    MessageBox.Show("Encorect sumbol");
+                    MessageBox.Show("Encorect string");
                     return;
                 }
             }
             int place = checkedListBoxTime.FindString(pattern, findIndex);
             findIndex = place;
             checkedListBoxTime.SelectedIndex = place;
+        }
+
+        private void tabControl_SelectedIndCha(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedIndex == 0)
+            {
+                selectToolStripMenuItem.Enabled = false;
+                sortingToolStripMenuItem.Enabled = false;
+            }
+            else if (tabControl.SelectedIndex == 1)
+            {
+                selectToolStripMenuItem.Enabled = true;
+                sortingToolStripMenuItem.Enabled = true;
+            }
+            else if (tabControl.SelectedIndex == 2)
+            {
+                selectToolStripMenuItem.Enabled = true;
+                sortingToolStripMenuItem.Enabled = true;
+            }
+        }
+
+        private void selectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form select = new Select(this);
+            select.Show();
         }
 
         /*private void buttonPlotCX_Click(object sender, EventArgs e)
