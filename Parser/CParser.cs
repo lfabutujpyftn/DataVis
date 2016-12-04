@@ -96,7 +96,7 @@ namespace Parser
                 if (flag == "0")
                 {
                     //Console.WriteLine("num: " + num + " t: " + t + " dt: " + dt + " st: " + start + " fin: " + finish + " fl: " + flag);
-                    writerT.WriteLine(t);
+                    writerT.WriteLine(t + " " + num);
                     FileStream[] files = new FileStream[dict.Count - 1];
                     Dictionary<string, int> dict2 = new Dictionary<string, int>();
                     int tmp3 = 0;

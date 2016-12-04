@@ -52,10 +52,12 @@
             this.rangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoscaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xrangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.yrangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videlitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videlitallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ochistitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.yrangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBoxFind = new System.Windows.Forms.TextBox();
+            this.buttonFind = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -80,6 +82,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.buttonFind);
+            this.tabPage1.Controls.Add(this.textBoxFind);
             this.tabPage1.Controls.Add(this.buttonPlotCT);
             this.tabPage1.Controls.Add(this.checkedListBoxTime);
             this.tabPage1.Controls.Add(this.checkedListBoxColoms);
@@ -107,9 +111,9 @@
             this.checkedListBoxTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.checkedListBoxTime.FormattingEnabled = true;
-            this.checkedListBoxTime.Location = new System.Drawing.Point(6, 5);
+            this.checkedListBoxTime.Location = new System.Drawing.Point(3, 5);
             this.checkedListBoxTime.Name = "checkedListBoxTime";
-            this.checkedListBoxTime.Size = new System.Drawing.Size(137, 244);
+            this.checkedListBoxTime.Size = new System.Drawing.Size(199, 214);
             this.checkedListBoxTime.TabIndex = 2;
             // 
             // checkedListBoxColoms
@@ -117,9 +121,9 @@
             this.checkedListBoxColoms.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.checkedListBoxColoms.FormattingEnabled = true;
-            this.checkedListBoxColoms.Location = new System.Drawing.Point(149, 5);
+            this.checkedListBoxColoms.Location = new System.Drawing.Point(208, 5);
             this.checkedListBoxColoms.Name = "checkedListBoxColoms";
-            this.checkedListBoxColoms.Size = new System.Drawing.Size(138, 244);
+            this.checkedListBoxColoms.Size = new System.Drawing.Size(164, 244);
             this.checkedListBoxColoms.TabIndex = 1;
             // 
             // tabPage2
@@ -140,9 +144,9 @@
             this.checkedListBoxColAlongId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.checkedListBoxColAlongId.FormattingEnabled = true;
-            this.checkedListBoxColAlongId.Location = new System.Drawing.Point(195, 6);
+            this.checkedListBoxColAlongId.Location = new System.Drawing.Point(208, 5);
             this.checkedListBoxColAlongId.Name = "checkedListBoxColAlongId";
-            this.checkedListBoxColAlongId.Size = new System.Drawing.Size(148, 244);
+            this.checkedListBoxColAlongId.Size = new System.Drawing.Size(164, 244);
             this.checkedListBoxColAlongId.TabIndex = 2;
             // 
             // buttonPlotAlongId
@@ -161,9 +165,9 @@
             this.checkedListBoxAlongId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.checkedListBoxAlongId.FormattingEnabled = true;
-            this.checkedListBoxAlongId.Location = new System.Drawing.Point(6, 6);
+            this.checkedListBoxAlongId.Location = new System.Drawing.Point(6, 5);
             this.checkedListBoxAlongId.Name = "checkedListBoxAlongId";
-            this.checkedListBoxAlongId.Size = new System.Drawing.Size(183, 244);
+            this.checkedListBoxAlongId.Size = new System.Drawing.Size(196, 244);
             this.checkedListBoxAlongId.TabIndex = 0;
             // 
             // tabPage3
@@ -196,7 +200,7 @@
             this.checkedListBoxXT.FormattingEnabled = true;
             this.checkedListBoxXT.Location = new System.Drawing.Point(6, 6);
             this.checkedListBoxXT.Name = "checkedListBoxXT";
-            this.checkedListBoxXT.Size = new System.Drawing.Size(233, 244);
+            this.checkedListBoxXT.Size = new System.Drawing.Size(366, 244);
             this.checkedListBoxXT.TabIndex = 0;
             // 
             // menuStrip1
@@ -247,7 +251,7 @@
             // legendToolStripMenuItem
             // 
             this.legendToolStripMenuItem.Name = "legendToolStripMenuItem";
-            this.legendToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.legendToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.legendToolStripMenuItem.Text = "Legend";
             this.legendToolStripMenuItem.Click += new System.EventHandler(this.legendToolStripMenuItem_Click);
             // 
@@ -257,7 +261,7 @@
             this.iDToolStripMenuItem,
             this.lineTypeToolStripMenuItem});
             this.sortingToolStripMenuItem.Name = "sortingToolStripMenuItem";
-            this.sortingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sortingToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.sortingToolStripMenuItem.Text = "Sorting";
             // 
             // iDToolStripMenuItem
@@ -283,7 +287,7 @@
             this.xrangeToolStripMenuItem,
             this.yrangeToolStripMenuItem});
             this.rangeToolStripMenuItem.Name = "rangeToolStripMenuItem";
-            this.rangeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rangeToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.rangeToolStripMenuItem.Text = "Range";
             // 
             // autoscaleToolStripMenuItem
@@ -291,16 +295,23 @@
             this.autoscaleToolStripMenuItem.Checked = true;
             this.autoscaleToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.autoscaleToolStripMenuItem.Name = "autoscaleToolStripMenuItem";
-            this.autoscaleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.autoscaleToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.autoscaleToolStripMenuItem.Text = "Autoscale";
             this.autoscaleToolStripMenuItem.Click += new System.EventHandler(this.autoscaleToolStripMenuItem_Click);
             // 
             // xrangeToolStripMenuItem
             // 
             this.xrangeToolStripMenuItem.Name = "xrangeToolStripMenuItem";
-            this.xrangeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.xrangeToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.xrangeToolStripMenuItem.Text = "Xrange";
             this.xrangeToolStripMenuItem.Click += new System.EventHandler(this.xrangeToolStripMenuItem_Click);
+            // 
+            // yrangeToolStripMenuItem
+            // 
+            this.yrangeToolStripMenuItem.Name = "yrangeToolStripMenuItem";
+            this.yrangeToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.yrangeToolStripMenuItem.Text = "Yrange";
+            this.yrangeToolStripMenuItem.Click += new System.EventHandler(this.yrangeToolStripMenuItem_Click);
             // 
             // videlitToolStripMenuItem
             // 
@@ -325,12 +336,22 @@
             this.ochistitToolStripMenuItem.Text = "Clean all";
             this.ochistitToolStripMenuItem.Click += new System.EventHandler(this.ochistitToolStripMenuItem_Click);
             // 
-            // yrangeToolStripMenuItem
+            // textBoxFind
             // 
-            this.yrangeToolStripMenuItem.Name = "yrangeToolStripMenuItem";
-            this.yrangeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.yrangeToolStripMenuItem.Text = "Yrange";
-            this.yrangeToolStripMenuItem.Click += new System.EventHandler(this.yrangeToolStripMenuItem_Click);
+            this.textBoxFind.Location = new System.Drawing.Point(3, 229);
+            this.textBoxFind.Name = "textBoxFind";
+            this.textBoxFind.Size = new System.Drawing.Size(118, 20);
+            this.textBoxFind.TabIndex = 4;
+            // 
+            // buttonFind
+            // 
+            this.buttonFind.Location = new System.Drawing.Point(127, 227);
+            this.buttonFind.Name = "buttonFind";
+            this.buttonFind.Size = new System.Drawing.Size(75, 23);
+            this.buttonFind.TabIndex = 5;
+            this.buttonFind.Text = "Find";
+            this.buttonFind.UseVisualStyleBackColor = true;
+            this.buttonFind.Click += new System.EventHandler(this.buttonFind_Click);
             // 
             // MainForm
             // 
@@ -346,6 +367,7 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -385,6 +407,8 @@
         public System.Windows.Forms.ToolStripMenuItem autoscaleToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem xrangeToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem yrangeToolStripMenuItem;
+        private System.Windows.Forms.Button buttonFind;
+        private System.Windows.Forms.TextBox textBoxFind;
     }
 }
 

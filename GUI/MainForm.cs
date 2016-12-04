@@ -33,6 +33,7 @@ namespace GUI
         public bool yrange;
         public double yfrom;
         public double yto;
+        int findIndex;
 
         public MainForm()
         {
@@ -45,6 +46,7 @@ namespace GUI
             yrange = false;
             yfrom = 0;
             yto = 1;
+            findIndex = -1;
         }
 
         public void init(string dir)
@@ -146,6 +148,18 @@ namespace GUI
 
         private void buttonPlotCT_Click(object sender, EventArgs e)
         {
+            if (checkedListBoxTime.CheckedItems.Count == 0 && checkedListBoxColoms.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("Select time and paremetrs");
+            }
+            else if(checkedListBoxColoms.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("Select paremetrs");
+            }
+            else if (checkedListBoxTime.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("Select time");
+            }
             if(checkedListBoxColoms.CheckedItems.Count != 0 && checkedListBoxTime.CheckedItems.Count != 0)
             {
                 FileStream fileT = new FileStream(dir + "/tmp.tmp", FileMode.Create, FileAccess.Write);
@@ -154,8 +168,23 @@ namespace GUI
                 ArrayList coloms = new ArrayList();
                 foreach (string s in checkedListBoxTime.CheckedItems)
                 {
-                    wT.WriteLine(s);
-                    time.Add(s);
+                    string[] tmp = s.Split(new char[] { ' ' });
+                    int i = 0;
+                    string t = "";
+                    foreach (string s2 in tmp)
+                    {
+                        if (s2.Trim() != "")
+                        {
+                            if (i == 0)
+                            {
+                                t = s2;
+                                break;
+                            }
+                            ++i;
+                        }
+                    }
+                    wT.WriteLine(t);
+                    time.Add(t);
                 }
                 foreach (string s in checkedListBoxColoms.CheckedItems)
                 {
@@ -170,6 +199,18 @@ namespace GUI
 
         private void buttonPlotAlongId_Click(object sender, EventArgs e)
         {
+            if (checkedListBoxAlongId.CheckedItems.Count == 0 && checkedListBoxColAlongId.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("Select idline and paremetrs");
+            }
+            else if (checkedListBoxColAlongId.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("Select paremetrs");
+            }
+            else if (checkedListBoxAlongId.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("Select idline");
+            }
             if (checkedListBoxAlongId.CheckedItems.Count != 0 && checkedListBoxColAlongId.CheckedItems.Count != 0)
             {
                 FileStream fileID = new FileStream(dir + "/tmp.tmp", FileMode.Create, FileAccess.Write);
@@ -197,6 +238,10 @@ namespace GUI
 
         private void buttonPlotXt_Click(object sender, EventArgs e)
         {
+            if (checkedListBoxXT.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("Select idline");
+            }
             if (checkedListBoxXT.CheckedItems.Count != 0)
             {
                 FileStream fileID = new FileStream(dir + "/tmp.tmp", FileMode.Create, FileAccess.Write);
@@ -401,6 +446,29 @@ namespace GUI
                 this.Enabled = false;
                 yr.Show();
             }
+        }
+
+        private void buttonFind_Click(object sender, EventArgs e)
+        {
+            string pattern = textBoxFind.Text;
+            if(pattern == "")
+            {
+                MessageBox.Show("Empty pattern");
+                return;
+            }
+            foreach(char c in pattern)
+            {
+                if (c != '0' && c != '1' && c != '2' && c != '3' && c != '4' && c != '5' &&
+                    c != '6' && c != '7' && c != '8' && c != '9' && c != '+' && c != '-' && c != 'E' && c != 'e'
+                    && c != '.' && c != ',')
+                {
+                    MessageBox.Show("Encorect sumbol");
+                    return;
+                }
+            }
+            int place = checkedListBoxTime.FindString(pattern, findIndex);
+            findIndex = place;
+            checkedListBoxTime.SelectedIndex = place;
         }
 
         /*private void buttonPlotCX_Click(object sender, EventArgs e)
