@@ -97,19 +97,23 @@ namespace GUI
                 //MessageBox.Show(res + " " + dict[res]);
                 if(dict[res] == 1)
                 {
-                    mainForm.checkedListBoxAlongId.SetItemChecked(i, true);
-                    mainForm.checkedListBoxXT.SetItemChecked(i, true);
+                    if(mainForm.tabControl.SelectedIndex == 1)
+                        mainForm.checkedListBoxAlongId.SetItemChecked(i, true);
+                    if (mainForm.tabControl.SelectedIndex == 2)
+                        mainForm.checkedListBoxXT.SetItemChecked(i, true);
                 }
-                if (dict[res] == 0)
+                else if (dict[res] == 0)
                 {
-                    mainForm.checkedListBoxXT.SetItemChecked(i, mainForm.checkedListBoxAlongId.GetItemChecked(i));
+                    //mainForm.checkedListBoxXT.SetItemChecked(i, mainForm.checkedListBoxAlongId.GetItemChecked(i));
                     continue;
                     //mainForm.checkedListBoxAlongId.SetItemChecked(i, true);
                 }
-                if (dict[res] == 2)
+                else if (dict[res] == 2)
                 {
-                    mainForm.checkedListBoxAlongId.SetItemChecked(i, false);
-                    mainForm.checkedListBoxXT.SetItemChecked(i, false);
+                    if (mainForm.tabControl.SelectedIndex == 1)
+                        mainForm.checkedListBoxAlongId.SetItemChecked(i, false);
+                    if (mainForm.tabControl.SelectedIndex == 2)
+                        mainForm.checkedListBoxXT.SetItemChecked(i, false);
                 }
             }
         }

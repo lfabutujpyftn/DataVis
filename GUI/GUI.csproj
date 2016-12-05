@@ -57,6 +57,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Line.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Line.Designer.cs">
+      <DependentUpon>Line.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     <Compile Include="XRange.Designer.cs">
       <DependentUpon>XRange.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Line.resx">
+      <DependentUpon>Line.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

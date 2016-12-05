@@ -35,16 +35,29 @@ namespace Tuner
         }
 
     }
+
+    public class StlLine
+    {
+        public int num;
+        public int col;
+        public StlLine(string a, string b)
+        {
+            this.num = Int32.Parse(a);
+            this.col = Int32.Parse(b);
+        }
+    }
     public class CTuner
     {
         public ArrayList columFGRGtun;
         public ArrayList typeLineTun;
+        public ArrayList styleLineTun;
         public string dir;
         public string o;
         public CTuner(string dir, string o)
         {
             columFGRGtun = new ArrayList();
             typeLineTun = new ArrayList();
+            styleLineTun = new ArrayList();
             this.dir = dir;
             this.o = o;
             initDirectory();
@@ -57,6 +70,7 @@ namespace Tuner
         {
             columFGRGtun = new ArrayList();
             typeLineTun = new ArrayList();
+            styleLineTun = new ArrayList();
             this.dir = dir;
             initDirectory();
            // initColumnFGRG();
@@ -227,10 +241,16 @@ namespace Tuner
             }
         }
 
+        public void TunStyle()
+        {
+            styleLineTun = this.loadLine();
+        }
+
         public void TUN()
         {
             this.TunColums();
             this.TunLines();
+            this.TunStyle();
         }
 
         public void printTun()
@@ -245,6 +265,53 @@ namespace Tuner
             {
                 Console.WriteLine(d.reduction + " " + d.name);
             }
+        }
+
+        public void saveLine(ArrayList num, ArrayList col)
+        {
+            FileStream file = new FileStream("./Setting/StyleLine.tun", FileMode.Create);
+            StreamWriter filewr = new StreamWriter(file);
+            int flag = 0;
+            foreach(var i in num)
+            {
+                filewr.WriteLine(i + " " + col[flag]);
+                flag++;
+            }
+
+            filewr.Close();
+            file.Close();
+        }
+
+        public ArrayList loadLine()
+        {
+            ArrayList res = new ArrayList();
+            FileStream file = new FileStream("./Setting/StyleLine.tun", FileMode.Open, FileAccess.Read);
+            StreamReader reader = new StreamReader(file);
+            while (!reader.EndOfStream)
+            {
+                string str = reader.ReadLine();
+                string[] tmp = str.Split(new char[] { ' ' });
+                int i = 0;
+                string num = "";
+                string col = "";
+                foreach (string s in tmp)
+                {
+                    if (s.Trim() != "")
+                    {
+                        if (i == 0)
+                            num = s;
+                        if (i == 1)
+                        {
+                            col = s;
+                        }
+                        ++i;
+                    }
+                }
+                res.Add(new StlLine(num, col));
+            }
+            reader.Close();
+            file.Close();
+            return res;
         }
 
        

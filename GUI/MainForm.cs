@@ -498,6 +498,12 @@ namespace GUI
             select.Show();
         }
 
+        private void lineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var stl = new Line(this);
+            stl.Show();
+        }
+
         /*private void buttonPlotCX_Click(object sender, EventArgs e)
         {
             if(checkedListBoxCX.CheckedItems.Count != 0)

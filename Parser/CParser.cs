@@ -7,6 +7,7 @@ using System.IO;
 using System.Threading;
 using System.Collections;
 using Tuner;
+using System.Windows.Forms;
 
 namespace Parser
 {
@@ -153,6 +154,7 @@ namespace Parser
                     }
                 }
             }
+            MessageBox.Show("const t");
             Console.WriteLine("countLine " + countLineF);
             writerT.Close();
             fileT.Close();
@@ -402,6 +404,7 @@ namespace Parser
             {
                 writerID.WriteLine(iter);
             }
+            MessageBox.Show("alongid xt");
             writerID.Close();
             fileID.Close();
             readerf.Close();

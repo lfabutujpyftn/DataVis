@@ -161,6 +161,30 @@ namespace Plot
             //par += " linecolor rgb \"#" + _color + "\"";
             return par;
         }
+
+        private string _GetParam(string title, int lw, int col)
+        {
+            string par = "using 1:2 ";
+            if (legend)
+                par += "title \"" + title + "\"";
+            else
+                par += "notitle";
+            switch (_drawType)
+            {
+                case DrawType.Lines:
+                    par += " with lines";
+                    break;
+                case DrawType.Points:
+                    par += " with points";
+                    break;
+                default:
+                    break;
+            }
+
+            par += " linecolor rgb \"#" + (col & 0xffffff).ToString("X") + "\"";
+            par += " lw " + lw + " ";
+            return par;
+        }
         public void DrawFiles(ArrayList filePath, ArrayList titles)
         {
             AwokeKnowing.GnuplotCSharp.GnuPlot.Set("xlabel \"" + _xTitle + "\"");
@@ -176,6 +200,28 @@ namespace Plot
             foreach(string s in titles)
             {
                 param.Add(_GetParam(s));
+            }
+            AwokeKnowing.GnuplotCSharp.GnuPlot.Plots(filePath, param);
+            Console.WriteLine("End draw file \"" + filePath + "\"");
+        }
+
+        public void DrawFiles(ArrayList filePath, ArrayList titles, ArrayList lw, ArrayList col)
+        {
+            AwokeKnowing.GnuplotCSharp.GnuPlot.Set("xlabel \"" + _xTitle + "\"");
+            AwokeKnowing.GnuplotCSharp.GnuPlot.Set("ylabel \"" + _yTitle + "\"");
+            if (autoscale == true)
+                AwokeKnowing.GnuplotCSharp.GnuPlot.Set("autoscale");
+            if (xrange == true)
+                AwokeKnowing.GnuplotCSharp.GnuPlot.Set("xrange [" + xfrom.ToString().Replace(',', '.') + ":" + xto.ToString().Replace(',', '.') + "]");
+            if (yrange == true)
+                AwokeKnowing.GnuplotCSharp.GnuPlot.Set("yrange [" + yfrom.ToString().Replace(',', '.') + ":" + yto.ToString().Replace(',', '.') + "]");
+            Console.WriteLine("Start draw file \"" + filePath + "\"");
+            ArrayList param = new ArrayList();
+            int i = 0;
+            foreach (string s in titles)
+            {
+                param.Add(_GetParam(s, (int)lw[i], (int)col[i]));
+                i++;
             }
             AwokeKnowing.GnuplotCSharp.GnuPlot.Plots(filePath, param);
             Console.WriteLine("End draw file \"" + filePath + "\"");

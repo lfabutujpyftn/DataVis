@@ -36,7 +36,7 @@ namespace Controller
             parser = new CParser(d, f, dir, tuner.columFGRGtun, tuner.typeLineTun);
            // parser.ParseConstT();
             //parser.ParseConstXall();
-            parser.ParseAlongID_XT();
+            //parser.ParseAlongID_XT();
             //parser.ParseXT();
             //parser.Parse();
             plt = new Plot.Plot();
@@ -132,6 +132,13 @@ namespace Controller
             {
                 dict2.Add(node.reduction, node.name);
             }
+            Dictionary<string, int> dict3 = new Dictionary<string, int>();
+            int tmpNumfordict3 = 0;
+            foreach (DataNodeLine node in tuner.typeLineTun)
+            {
+                dict3.Add(node.reduction, tmpNumfordict3);
+                tmpNumfordict3++;
+            }
 
             ArrayList reduct = new ArrayList();
             foreach (string s in coloms)
@@ -205,6 +212,8 @@ namespace Controller
             }
             ArrayList fileList = new ArrayList();
             ArrayList titleList = new ArrayList();
+            ArrayList lw = new ArrayList();
+            ArrayList col = new ArrayList();
             variable = reduct[0].ToString();
            // string mes = "";
             foreach (string s2 in reduct)
@@ -214,6 +223,8 @@ namespace Controller
                 {
                     fileList.Add(dir + "/AlongID/" + s + "_" + numline[tmpi] + "_t_" + s2);
                     titleList.Add(s2 + ", " + dict2[numline[tmpi].ToString()] + ", ID=" + s);
+                    lw.Add(((StlLine)this.tuner.styleLineTun[dict3[numline[tmpi].ToString()]]).num);
+                    col.Add(((StlLine)this.tuner.styleLineTun[dict3[numline[tmpi].ToString()]]).col);
               //      mes += "/AlongID/" + s + "_" + numline[tmpi] + "_t_" + s2 + " # ";
                     tmpi++;
                 }
@@ -223,7 +234,7 @@ namespace Controller
            // MessageBox.Show(mes);
             plt.XTitle = "t";
             plt.YTitle = variable;
-            plt.DrawFiles(fileList, titleList);
+            plt.DrawFiles(fileList, titleList, lw, col);
         }
 
         public void PlotSelectItemXT(ArrayList ID)
@@ -239,6 +250,13 @@ namespace Controller
             foreach (DataNodeLine node in tuner.typeLineTun)
             {
                 dict2.Add(node.reduction, node.name);
+            }
+            Dictionary<string, int> dict3 = new Dictionary<string, int>();
+            int tmpNumfordict3 = 0;
+            foreach (DataNodeLine node in tuner.typeLineTun)
+            {
+                dict3.Add(node.reduction, tmpNumfordict3);
+                tmpNumfordict3++;
             }
             ArrayList idline = new ArrayList();
             ArrayList numline = new ArrayList();
@@ -302,17 +320,21 @@ namespace Controller
 
             ArrayList fileList = new ArrayList();
             ArrayList titleList = new ArrayList();
+            ArrayList lw = new ArrayList();
+            ArrayList col = new ArrayList();
             variable = "t";
             tmpi = 0;
             foreach (string s in idline)
             {
                 fileList.Add(dir + "/XT/" + s + "_" + numline[tmpi] + "_x_t");
                 titleList.Add(dict2[numline[tmpi].ToString()] + ", ID=" + s);
+                lw.Add(((StlLine)this.tuner.styleLineTun[dict3[numline[tmpi].ToString()]]).num);
+                col.Add(((StlLine)this.tuner.styleLineTun[dict3[numline[tmpi].ToString()]]).col);
                 tmpi++; 
             }
             plt.XTitle = "X";
             plt.YTitle = variable;
-            plt.DrawFiles(fileList, titleList);
+            plt.DrawFiles(fileList, titleList, lw, col);
         }
         public bool Legend
         {
@@ -351,6 +373,17 @@ namespace Controller
         {
             set { plt.YFrom = value; }
         }
+
+        public void saveLine(ArrayList num, ArrayList col)
+        {
+            this.tuner.saveLine(num, col);
+        }
+
+        public ArrayList loadLine()
+        {
+            return this.tuner.loadLine();
+        }
+
     }
     public class Test
     {
