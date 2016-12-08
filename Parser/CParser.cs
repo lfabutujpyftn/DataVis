@@ -97,7 +97,7 @@ namespace Parser
                 if (flag == "0")
                 {
                     //Console.WriteLine("num: " + num + " t: " + t + " dt: " + dt + " st: " + start + " fin: " + finish + " fl: " + flag);
-                    writerT.WriteLine(t + " " + num);
+                    writerT.WriteLine(t + "      " + num);
                     FileStream[] files = new FileStream[dict.Count - 1];
                     Dictionary<string, int> dict2 = new Dictionary<string, int>();
                     int tmp3 = 0;
@@ -154,7 +154,7 @@ namespace Parser
                     }
                 }
             }
-            MessageBox.Show("const t");
+           // MessageBox.Show("const t");
             Console.WriteLine("countLine " + countLineF);
             writerT.Close();
             fileT.Close();
@@ -404,7 +404,7 @@ namespace Parser
             {
                 writerID.WriteLine(iter);
             }
-            MessageBox.Show("alongid xt");
+            //MessageBox.Show("alongid xt");
             writerID.Close();
             fileID.Close();
             readerf.Close();

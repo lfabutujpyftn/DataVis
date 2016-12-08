@@ -39,11 +39,13 @@ namespace Tuner
     public class StlLine
     {
         public int num;
+        public int numpt;
         public int col;
-        public StlLine(string a, string b)
+        public StlLine(string a, string b, string c)
         {
             this.num = Int32.Parse(a);
-            this.col = Int32.Parse(b);
+            this.col = Int32.Parse(c);
+            this.numpt = Int32.Parse(b);
         }
     }
     public class CTuner
@@ -64,6 +66,7 @@ namespace Tuner
             createFGRGTUN(o);
            // initColumnFGRG();
             initTypeLine();
+            initStyleLine();
         }
 
         public CTuner(string dir)
@@ -75,6 +78,7 @@ namespace Tuner
             initDirectory();
            // initColumnFGRG();
             initTypeLine();
+            initStyleLine();
         }
 
         public void initDirectory()
@@ -174,6 +178,31 @@ namespace Tuner
                 filewr.Close();
             }
         }
+        public void initStyleLine()
+        {
+            if (!File.Exists("./Setting/StyleLine.tun"))
+            {
+                FileStream file = new FileStream("./Setting/StyleLine.tun", FileMode.Create);
+                StreamWriter filewr = new StreamWriter(file);
+                filewr.WriteLine("1 -1 -16777216");
+                filewr.WriteLine("1 -1 -16777216");
+                filewr.WriteLine("1 -1 -16777216");
+                filewr.WriteLine("1 -1 -16777216");
+                filewr.WriteLine("1 -1 -16777216");
+                filewr.WriteLine("1 -1 -16777216");
+                filewr.WriteLine("1 -1 -16777216");
+                filewr.WriteLine("1 -1 -16777216");
+                filewr.WriteLine("1 -1 -16777216");
+                filewr.WriteLine("1 -1 -16777216");
+                filewr.WriteLine("1 -1 -16777216");
+                filewr.WriteLine("1 -1 -16777216");
+                filewr.WriteLine("1 -1 -16777216");
+                filewr.WriteLine("1 -1 -16777216");
+                filewr.WriteLine("1 -1 -16777216");
+
+                filewr.Close();
+            }
+        }
 
         public void TunColums()
         {
@@ -267,14 +296,14 @@ namespace Tuner
             }
         }
 
-        public void saveLine(ArrayList num, ArrayList col)
+        public void saveLine(ArrayList num, ArrayList numpt, ArrayList col)
         {
             FileStream file = new FileStream("./Setting/StyleLine.tun", FileMode.Create);
             StreamWriter filewr = new StreamWriter(file);
             int flag = 0;
             foreach(var i in num)
             {
-                filewr.WriteLine(i + " " + col[flag]);
+                filewr.WriteLine(i + " " + numpt[flag] + " " + col[flag]);
                 flag++;
             }
 
@@ -293,6 +322,7 @@ namespace Tuner
                 string[] tmp = str.Split(new char[] { ' ' });
                 int i = 0;
                 string num = "";
+                string numpt = "";
                 string col = "";
                 foreach (string s in tmp)
                 {
@@ -301,13 +331,15 @@ namespace Tuner
                         if (i == 0)
                             num = s;
                         if (i == 1)
+                            numpt = s;
+                        if (i == 2)
                         {
                             col = s;
                         }
                         ++i;
                     }
                 }
-                res.Add(new StlLine(num, col));
+                res.Add(new StlLine(num, numpt, col));
             }
             reader.Close();
             file.Close();

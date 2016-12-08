@@ -117,6 +117,7 @@
             this.textBoxFind.Name = "textBoxFind";
             this.textBoxFind.Size = new System.Drawing.Size(118, 20);
             this.textBoxFind.TabIndex = 4;
+            this.textBoxFind.KeyDown += new System.Windows.Forms.KeyEventHandler(key_d);
             // 
             // buttonPlotCT
             // 

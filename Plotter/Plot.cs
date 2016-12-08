@@ -162,14 +162,14 @@ namespace Plot
             return par;
         }
 
-        private string _GetParam(string title, int lw, int col)
+        private string _GetParam(string title, int lw, int pt, int col)
         {
             string par = "using 1:2 ";
             if (legend)
                 par += "title \"" + title + "\"";
             else
                 par += "notitle";
-            switch (_drawType)
+           /* switch (_drawType)
             {
                 case DrawType.Lines:
                     par += " with lines";
@@ -179,7 +179,9 @@ namespace Plot
                     break;
                 default:
                     break;
-            }
+            }*/
+
+            par += " with linespoints lt " + pt;
 
             par += " linecolor rgb \"#" + (col & 0xffffff).ToString("X") + "\"";
             par += " lw " + lw + " ";
@@ -205,7 +207,7 @@ namespace Plot
             Console.WriteLine("End draw file \"" + filePath + "\"");
         }
 
-        public void DrawFiles(ArrayList filePath, ArrayList titles, ArrayList lw, ArrayList col)
+        public void DrawFiles(ArrayList filePath, ArrayList titles, ArrayList lw, ArrayList pt, ArrayList col)
         {
             AwokeKnowing.GnuplotCSharp.GnuPlot.Set("xlabel \"" + _xTitle + "\"");
             AwokeKnowing.GnuplotCSharp.GnuPlot.Set("ylabel \"" + _yTitle + "\"");
@@ -220,7 +222,7 @@ namespace Plot
             int i = 0;
             foreach (string s in titles)
             {
-                param.Add(_GetParam(s, (int)lw[i], (int)col[i]));
+                param.Add(_GetParam(s, (int)lw[i], (int)pt[i], (int)col[i]));
                 i++;
             }
             AwokeKnowing.GnuplotCSharp.GnuPlot.Plots(filePath, param);

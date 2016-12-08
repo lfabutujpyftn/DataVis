@@ -47,8 +47,10 @@ namespace GUI
             yfrom = 0;
             yto = 1;
             findIndex = -1;
+            //findIndex = 0;
             selectToolStripMenuItem.Enabled = false;
             sortingToolStripMenuItem.Enabled = false;
+            styleToolStripMenuItem.Enabled = false;
         }
 
         public void init(string dir)
@@ -333,6 +335,16 @@ namespace GUI
             {
                 lineTypeToolStripMenuItem.Checked = false;
                 iDToolStripMenuItem.Checked = true;
+                Dictionary<string, bool> dictalid = new Dictionary<string, bool>();
+                Dictionary<string, bool> dictxt = new Dictionary<string, bool>();
+                for (int i = 0; i < checkedListBoxAlongId.Items.Count; ++i)
+                {
+                    dictalid.Add((string)checkedListBoxAlongId.Items[i], checkedListBoxAlongId.GetItemChecked(i));
+                }
+                for (int i = 0; i < checkedListBoxXT.Items.Count; ++i)
+                {
+                    dictxt.Add((string)checkedListBoxXT.Items[i], checkedListBoxXT.GetItemChecked(i));
+                }
                 checkedListBoxAlongId.Items.Clear();
                 checkedListBoxXT.Items.Clear();
                 Dictionary<string, string> dict = new Dictionary<string, string>();
@@ -358,33 +370,65 @@ namespace GUI
                     string res = arr[0].ToString() + " " + dict[arr[1].ToString()];
                     checkedListBoxAlongId.Items.Add(res);
                     checkedListBoxXT.Items.Add(res);
+                    checkedListBoxXT.SetItemChecked(checkedListBoxXT.Items.Count - 1, dictxt[res]);
+                    checkedListBoxAlongId.SetItemChecked(checkedListBoxAlongId.Items.Count - 1, dictalid[res]);
                 }
                 readerID.Close();
                 fileID.Close();
             }
         }
+        private void key_d(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) 
+            {
+                this.buttonFind_Click(this, new EventArgs());
+            }
+        }
+
 
         private void lineTypeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(iDToolStripMenuItem.Checked == true)
             {
-                iDToolStripMenuItem.Checked = false;
-                lineTypeToolStripMenuItem.Checked = true;
+                    iDToolStripMenuItem.Checked = false;
+                    lineTypeToolStripMenuItem.Checked = true;
 
-                ArrayList list = new ArrayList();
-                foreach(string i in checkedListBoxAlongId.Items)
-                {
-                    list.Add(i);
-                }
-                checkedListBoxAlongId.Items.Clear();
-                checkedListBoxXT.Items.Clear();
-                MYComparer comp = new MYComparer();
-                list.Sort(comp);
-                foreach(var i in list)
-                {
-                    checkedListBoxAlongId.Items.Add(i);
-                    checkedListBoxXT.Items.Add(i);
-                }
+                    ArrayList list = new ArrayList();
+                    /*foreach(string i in checkedListBoxAlongId.Items)
+                    {
+                        list.Add();
+                    }*/
+                    for (int i = 0; i < checkedListBoxAlongId.Items.Count; ++i)
+                    {
+                        list.Add(new MySortClass((string)checkedListBoxAlongId.Items[i], checkedListBoxAlongId.GetItemChecked(i)));
+                    }
+                    checkedListBoxAlongId.Items.Clear();
+                    MYComparer comp = new MYComparer();
+                    list.Sort(comp);
+                    foreach (MySortClass i in list)
+                    {
+                        checkedListBoxAlongId.Items.Add(i.str);
+                        checkedListBoxAlongId.SetItemChecked(checkedListBoxAlongId.Items.Count - 1, i.check);
+                        // checkedListBoxXT.Items.Add(i);
+                    } 
+                    list = new ArrayList();
+                    /*foreach(string i in checkedListBoxAlongId.Items)
+                    {
+                        list.Add();
+                    }*/
+                    for (int i = 0; i < checkedListBoxAlongId.Items.Count; ++i)
+                    {
+                        list.Add(new MySortClass((string)checkedListBoxXT.Items[i], checkedListBoxXT.GetItemChecked(i)));
+                    }
+                    checkedListBoxXT.Items.Clear();
+                    comp = new MYComparer();
+                    list.Sort(comp);
+                    foreach (MySortClass i in list)
+                    {
+                        checkedListBoxXT.Items.Add(i.str);
+                        checkedListBoxXT.SetItemChecked(checkedListBoxXT.Items.Count - 1, i.check);
+                        // checkedListBoxXT.Items.Add(i);
+                    }
 
             }
         }
@@ -468,9 +512,25 @@ namespace GUI
                     return;
                 }
             }
-            int place = checkedListBoxTime.FindString(pattern, findIndex);
+            /*int place = checkedListBoxTime.FindString(pattern, findIndex);
             findIndex = place;
-            checkedListBoxTime.SelectedIndex = place;
+            checkedListBoxTime.SelectedIndex = place;*/
+            int flag = 0;
+            for(int i = findIndex + 1; i < checkedListBoxTime.Items.Count; ++i)
+            {
+                if(((string)checkedListBoxTime.Items[i]).IndexOf(pattern) != -1)
+                {
+                    checkedListBoxTime.SelectedIndex = i;
+                    findIndex = i;
+                    flag = 1;
+                    break;
+                }
+            }
+            if(flag == 0)
+            {
+                findIndex = -1;
+            }
+
         }
 
         private void tabControl_SelectedIndCha(object sender, EventArgs e)
@@ -479,16 +539,19 @@ namespace GUI
             {
                 selectToolStripMenuItem.Enabled = false;
                 sortingToolStripMenuItem.Enabled = false;
+                styleToolStripMenuItem.Enabled = false;
             }
             else if (tabControl.SelectedIndex == 1)
             {
                 selectToolStripMenuItem.Enabled = true;
                 sortingToolStripMenuItem.Enabled = true;
+                styleToolStripMenuItem.Enabled = true;
             }
             else if (tabControl.SelectedIndex == 2)
             {
                 selectToolStripMenuItem.Enabled = true;
                 sortingToolStripMenuItem.Enabled = true;
+                styleToolStripMenuItem.Enabled = true;
             }
         }
 
@@ -525,13 +588,26 @@ namespace GUI
             sortingToolStripMenuItem.Enabled = true;
         }*/
     }
+
+    public class MySortClass
+    {
+        public string str;
+        public bool check;
+        public MySortClass(string str, bool check)
+        {
+            this.str = str;
+            this.check = check;
+        }
+    }
+
     public class MYComparer : IComparer
     {
 
         // Calls CaseInsensitiveComparer.Compare with the parameters reversed.
         int IComparer.Compare(Object x, Object y)
         {
-            string tmp = (string)x;
+
+            string tmp = ((MySortClass)x).str;
             string a = "";
             for(int i = 0; i < tmp.Length; ++i)
             {
@@ -545,7 +621,7 @@ namespace GUI
                     a += tmp[i];
                 }
             }
-            tmp = (string)y;
+            tmp = ((MySortClass)y).str;
             string b = "";
             for (int i = 0; i < tmp.Length; ++i)
             {
