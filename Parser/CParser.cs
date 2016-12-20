@@ -481,21 +481,21 @@ namespace Parser
                         ++i;
                     }
                 }
-                if(flag == "0")
-                {
+               // if(flag == "0")
+                //{
                     foreach(var f in fileDic)
                     {
                         f.Value.WriteLine("");
                     }
-                }
+                //}
                 for (int k = Int32.Parse(start); k <= Int32.Parse(finish); ++k)
                 {
                     columLine++;
                     if (columLine % 100000 == 0)
                         Console.WriteLine(columLine);
                     string str2 = readerf.ReadLine();
-                    if (flag != "0")
-                       continue;
+                    //if (flag != "0")
+                      // continue;
                     if (columLine % 1 != 0)
                     {
                         continue;
