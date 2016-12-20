@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace GUI
 {
@@ -22,6 +23,16 @@ namespace GUI
             dir = "";
             textBox1.Enabled = false;
             textBox1.Text = "Open directory";
+            if(File.Exists("./Setting/OpenFormPath.tun"))
+            {
+                FileStream file = new FileStream("./Setting/OpenFormPath.tun", FileMode.Open, FileAccess.Read);
+                StreamReader reader = new StreamReader(file);
+                string tmp = reader.ReadLine();
+                dir = tmp;
+                textBox1.Text = tmp;
+                reader.Close();
+                file.Close();
+            }
         }
 
         private void buttonOpen_Click(object sender, EventArgs e)
@@ -30,6 +41,7 @@ namespace GUI
             {
                 main.init(dir);
                 main.Enabled = true;
+                main.controller.savePathLoadDir(dir);
                 this.Close();
             }
         }

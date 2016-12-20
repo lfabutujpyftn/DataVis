@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.Globalization;
+using System.IO;
 
 namespace GUI
 {
@@ -29,9 +30,11 @@ namespace GUI
             //main = f;
             //main.Enabled = false;
             d = "";
+            o = "";
             dir = "";
             this.f = "";
             this.parse = false;
+            
         }
 
         private void Parse_Load(object sender, EventArgs e)
@@ -47,6 +50,25 @@ namespace GUI
             progressBar.Maximum = 100;
             textBox1.Enabled = false;
             textBox1.Text = "";
+            if (File.Exists("./Setting/ParseFormPath.tun"))
+            {
+                FileStream file = new FileStream("./Setting/ParseFormPath.tun", FileMode.Open, FileAccess.Read);
+                StreamReader reader = new StreamReader(file);
+                string tmp = reader.ReadLine();
+                d = tmp;
+                textBoxD.Text = tmp; 
+                tmp = reader.ReadLine();
+                f = tmp;
+                textBoxF.Text = tmp;
+                tmp = reader.ReadLine();
+                o = tmp;
+                textBoxO.Text = tmp;
+                tmp = reader.ReadLine();
+                dir = tmp;
+                textBoxDir.Text = tmp;
+                reader.Close();
+                file.Close();
+            }
         }
 
         private void buttonD_Click(object sender, EventArgs e)
@@ -71,7 +93,7 @@ namespace GUI
 
         private void buttonParse_Click(object sender, EventArgs e)
         {
-            if (d != "" && f != "" && dir != "")
+            if (d != "" && f != "" && dir != "" && o != "")
             {
                 if(parse == false)
                 {
@@ -82,6 +104,7 @@ namespace GUI
                     buttonParse.Enabled = false;
                     Thread th = new Thread(func);
                     mainform.init(d, f, o, dir);
+                    mainform.controller.savePathParseDir(d, f, o, dir);
                    // mainform = new MainForm(main, d, f, dir);
                     //Task tsk = new Task(func);
                     //func();
@@ -125,8 +148,8 @@ namespace GUI
             textBox1.Text = "Parse along ID and XT diagram data";
             mainform.controller.ParseAID_XT();
             progressBar.Value += 100 / 3;
-            //textBox1.Text = "Parse const x diagram data";
-            //mainform.controller.ParseCX();
+            textBox1.Text = "Parse 3d diagram data";
+            mainform.controller.Parse3d();
             progressBar.Value += 100 / 3;
             buttonParse.Text = "Start";
             this.parse = true;

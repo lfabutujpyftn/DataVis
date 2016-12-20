@@ -296,6 +296,28 @@ namespace Tuner
             }
         }
 
+        public void savePathLoadDir(string dir)
+        {
+            FileStream file = new FileStream("./Setting/OpenFormPath.tun", FileMode.Create);
+            StreamWriter filewr = new StreamWriter(file);
+            filewr.WriteLine(dir);
+            filewr.Close();
+            file.Close();
+        }
+
+        public void savePathParseDir(string d, string f, string o, string dir)
+        {
+            FileStream file = new FileStream("./Setting/ParseFormPath.tun", FileMode.Create);
+            StreamWriter filewr = new StreamWriter(file);
+            filewr.WriteLine(d);
+            filewr.WriteLine(f);
+            filewr.WriteLine(o);
+            filewr.WriteLine(dir);
+            filewr.Close();
+            file.Close();
+        }
+
+
         public void saveLine(ArrayList num, ArrayList numpt, ArrayList col)
         {
             FileStream file = new FileStream("./Setting/StyleLine.tun", FileMode.Create);

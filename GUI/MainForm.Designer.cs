@@ -42,6 +42,9 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.buttonPlotXt = new System.Windows.Forms.Button();
             this.checkedListBoxXT = new System.Windows.Forms.CheckedListBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.buttonPlot3d = new System.Windows.Forms.Button();
+            this.comboBox3D = new System.Windows.Forms.ComboBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,16 +58,17 @@
             this.autoscaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xrangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yrangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.styleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videlitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videlitallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ochistitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.styleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,6 +80,7 @@
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Controls.Add(this.tabPage2);
             this.tabControl.Controls.Add(this.tabPage3);
+            this.tabControl.Controls.Add(this.tabPage4);
             this.tabControl.Location = new System.Drawing.Point(12, 27);
             this.tabControl.Multiline = true;
             this.tabControl.Name = "tabControl";
@@ -117,7 +122,7 @@
             this.textBoxFind.Name = "textBoxFind";
             this.textBoxFind.Size = new System.Drawing.Size(118, 20);
             this.textBoxFind.TabIndex = 4;
-            this.textBoxFind.KeyDown += new System.Windows.Forms.KeyEventHandler(key_d);
+            this.textBoxFind.KeyDown += new System.Windows.Forms.KeyEventHandler(this.key_d);
             // 
             // buttonPlotCT
             // 
@@ -227,6 +232,40 @@
             this.checkedListBoxXT.Size = new System.Drawing.Size(366, 244);
             this.checkedListBoxXT.TabIndex = 0;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.buttonPlot3d);
+            this.tabPage4.Controls.Add(this.comboBox3D);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(459, 255);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "3D";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // buttonPlot3d
+            // 
+            this.buttonPlot3d.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPlot3d.Location = new System.Drawing.Point(378, 226);
+            this.buttonPlot3d.Name = "buttonPlot3d";
+            this.buttonPlot3d.Size = new System.Drawing.Size(75, 23);
+            this.buttonPlot3d.TabIndex = 1;
+            this.buttonPlot3d.Text = "Plot";
+            this.buttonPlot3d.UseVisualStyleBackColor = true;
+            this.buttonPlot3d.Click += new System.EventHandler(this.buttonPlot3d_Click);
+            // 
+            // comboBox3D
+            // 
+            this.comboBox3D.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.comboBox3D.FormattingEnabled = true;
+            this.comboBox3D.Location = new System.Drawing.Point(6, 6);
+            this.comboBox3D.Name = "comboBox3D";
+            this.comboBox3D.Size = new System.Drawing.Size(447, 21);
+            this.comboBox3D.TabIndex = 0;
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -276,7 +315,7 @@
             // legendToolStripMenuItem
             // 
             this.legendToolStripMenuItem.Name = "legendToolStripMenuItem";
-            this.legendToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.legendToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.legendToolStripMenuItem.Text = "Legend";
             this.legendToolStripMenuItem.Click += new System.EventHandler(this.legendToolStripMenuItem_Click);
             // 
@@ -286,7 +325,7 @@
             this.iDToolStripMenuItem,
             this.lineTypeToolStripMenuItem});
             this.sortingToolStripMenuItem.Name = "sortingToolStripMenuItem";
-            this.sortingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.sortingToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.sortingToolStripMenuItem.Text = "Sorting";
             // 
             // iDToolStripMenuItem
@@ -312,7 +351,7 @@
             this.xrangeToolStripMenuItem,
             this.yrangeToolStripMenuItem});
             this.rangeToolStripMenuItem.Name = "rangeToolStripMenuItem";
-            this.rangeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rangeToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.rangeToolStripMenuItem.Text = "Range";
             // 
             // autoscaleToolStripMenuItem
@@ -337,6 +376,21 @@
             this.yrangeToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.yrangeToolStripMenuItem.Text = "Yrange";
             this.yrangeToolStripMenuItem.Click += new System.EventHandler(this.yrangeToolStripMenuItem_Click);
+            // 
+            // styleToolStripMenuItem
+            // 
+            this.styleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lineToolStripMenuItem});
+            this.styleToolStripMenuItem.Name = "styleToolStripMenuItem";
+            this.styleToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.styleToolStripMenuItem.Text = "Style";
+            // 
+            // lineToolStripMenuItem
+            // 
+            this.lineToolStripMenuItem.Name = "lineToolStripMenuItem";
+            this.lineToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.lineToolStripMenuItem.Text = "Line";
+            this.lineToolStripMenuItem.Click += new System.EventHandler(this.lineToolStripMenuItem_Click);
             // 
             // videlitToolStripMenuItem
             // 
@@ -369,21 +423,6 @@
             this.selectToolStripMenuItem.Text = "Select";
             this.selectToolStripMenuItem.Click += new System.EventHandler(this.selectToolStripMenuItem_Click);
             // 
-            // styleToolStripMenuItem
-            // 
-            this.styleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lineToolStripMenuItem});
-            this.styleToolStripMenuItem.Name = "styleToolStripMenuItem";
-            this.styleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.styleToolStripMenuItem.Text = "Style";
-            // 
-            // lineToolStripMenuItem
-            // 
-            this.lineToolStripMenuItem.Name = "lineToolStripMenuItem";
-            this.lineToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.lineToolStripMenuItem.Text = "Line";
-            this.lineToolStripMenuItem.Click += new System.EventHandler(this.lineToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -401,6 +440,7 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -443,6 +483,9 @@
         private System.Windows.Forms.ToolStripMenuItem selectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem styleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lineToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Button buttonPlot3d;
+        private System.Windows.Forms.ComboBox comboBox3D;
     }
 }
 

@@ -21,8 +21,8 @@ namespace AwokeKnowing.GnuplotCSharp
 
         static GnuPlot()
         {
-            //PathToGnuplot = @"C:\Program Files\gnuplot\bin";
-            PathToGnuplot = @"C:\Program Files (x86)\gnuplot\bin\";
+            PathToGnuplot = @"C:\Program Files\gnuplot\bin";
+            //PathToGnuplot = @"C:\Program Files (x86)\gnuplot\bin\";
             if (PathToGnuplot[PathToGnuplot.Length - 1].ToString() != @"\")
                 PathToGnuplot += @"\";
             ExtPro = new Process();

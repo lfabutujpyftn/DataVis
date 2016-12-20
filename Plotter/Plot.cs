@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Plot
 {
@@ -189,6 +190,7 @@ namespace Plot
         }
         public void DrawFiles(ArrayList filePath, ArrayList titles)
         {
+
             AwokeKnowing.GnuplotCSharp.GnuPlot.Set("xlabel \"" + _xTitle + "\"");
             AwokeKnowing.GnuplotCSharp.GnuPlot.Set("ylabel \"" + _yTitle + "\"");
             if(autoscale == true)
@@ -209,6 +211,7 @@ namespace Plot
 
         public void DrawFiles(ArrayList filePath, ArrayList titles, ArrayList lw, ArrayList pt, ArrayList col)
         {
+            MessageBox.Show("plot start");
             AwokeKnowing.GnuplotCSharp.GnuPlot.Set("xlabel \"" + _xTitle + "\"");
             AwokeKnowing.GnuplotCSharp.GnuPlot.Set("ylabel \"" + _yTitle + "\"");
             if (autoscale == true)
@@ -225,6 +228,7 @@ namespace Plot
                 param.Add(_GetParam(s, (int)lw[i], (int)pt[i], (int)col[i]));
                 i++;
             }
+            MessageBox.Show("plot finish");
             AwokeKnowing.GnuplotCSharp.GnuPlot.Plots(filePath, param);
             Console.WriteLine("End draw file \"" + filePath + "\"");
         }
@@ -249,6 +253,35 @@ namespace Plot
                 y[i] = ((Point)(arrPoints[i])).Y;
             }
             AwokeKnowing.GnuplotCSharp.GnuPlot.Plot(x, y, _GetParam());
+        }
+
+        public void draw3dfile(string file, string title)
+        {
+            AwokeKnowing.GnuplotCSharp.GnuPlot.Set("xlabel \"x\"");
+            AwokeKnowing.GnuplotCSharp.GnuPlot.Set("ylabel \"t\"");
+            AwokeKnowing.GnuplotCSharp.GnuPlot.Set("ztics (0 \"0\")");
+            AwokeKnowing.GnuplotCSharp.GnuPlot.Set("view 0,0,1,1");
+            AwokeKnowing.GnuplotCSharp.GnuPlot.Set("pm3d flush begin ftriangles scansforward at s interpolate 10,1");
+            
+            if (autoscale == true)
+                AwokeKnowing.GnuplotCSharp.GnuPlot.Set("autoscale");
+            if (xrange == true)
+                AwokeKnowing.GnuplotCSharp.GnuPlot.Set("xrange [" + xfrom.ToString().Replace(',', '.') + ":" + xto.ToString().Replace(',', '.') + "]");
+            if (yrange == true)
+                AwokeKnowing.GnuplotCSharp.GnuPlot.Set("yrange [" + yfrom.ToString().Replace(',', '.') + ":" + yto.ToString().Replace(',', '.') + "]");
+            string param = "with pm3d";
+            //string param = "with line";
+            
+            if(this.legend)
+            {
+             //   MessageBox.Show(title);
+                param += " title \"" + title + "\"";
+            }
+            else 
+            {
+                param += " title \"\"";
+            }
+            AwokeKnowing.GnuplotCSharp.GnuPlot.SPlot("\"" + file + "\"", param);
         }
     }
 }

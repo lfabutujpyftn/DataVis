@@ -95,9 +95,11 @@ namespace GUI
                     {
                         checkedListBoxColoms.Items.Add(s.reduction + " " + s.name);
                         checkedListBoxColAlongId.Items.Add(s.reduction + " " + s.name);
+                        comboBox3D.Items.Add(s.reduction + " " + s.name);
                         //checkedListBoxCX.Items.Add(s.reduction + " " + s.name);
                     }
             }
+            comboBox3D.SelectedItem = comboBox3D.Items[0];
             FileStream fileT = new FileStream(dir + "/ConstT/time", FileMode.Open, FileAccess.Read);
             StreamReader readerT = new StreamReader(fileT);
             while (!readerT.EndOfStream)
@@ -140,6 +142,15 @@ namespace GUI
             readerID.Close();
             fileID.Close();
             
+                for (int i = 0; i < checkedListBoxAlongId.Items.Count; ++i)
+                {
+                    checkedListBoxAlongId.SetItemChecked(i, true);
+                }
+                for (int i = 0; i < checkedListBoxXT.Items.Count; ++i)
+                {
+                    checkedListBoxXT.SetItemChecked(i, true);
+                }
+            
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -166,8 +177,8 @@ namespace GUI
             }
             if(checkedListBoxColoms.CheckedItems.Count != 0 && checkedListBoxTime.CheckedItems.Count != 0)
             {
-                FileStream fileT = new FileStream(dir + "/tmp.tmp", FileMode.Create, FileAccess.Write);
-                StreamWriter wT = new StreamWriter(fileT);
+              //  FileStream fileT = new FileStream(dir + "/tmp.tmp", FileMode.Create, FileAccess.Write);
+              //  StreamWriter wT = new StreamWriter(fileT);
                 ArrayList time = new ArrayList();
                 ArrayList coloms = new ArrayList();
                 foreach (string s in checkedListBoxTime.CheckedItems)
@@ -187,16 +198,16 @@ namespace GUI
                             ++i;
                         }
                     }
-                    wT.WriteLine(t);
+             //       wT.WriteLine(t);
                     time.Add(t);
                 }
                 foreach (string s in checkedListBoxColoms.CheckedItems)
                 {
-                    wT.WriteLine(s);
+             //       wT.WriteLine(s);
                     coloms.Add(s);
                 }
-                wT.Close();
-                fileT.Close();
+            //    wT.Close();
+            //    fileT.Close();
                 controller.PlotSelectItemConstT(time, coloms);
             }
         }
@@ -217,25 +228,25 @@ namespace GUI
             }
             if (checkedListBoxAlongId.CheckedItems.Count != 0 && checkedListBoxColAlongId.CheckedItems.Count != 0)
             {
-                FileStream fileID = new FileStream(dir + "/tmp.tmp", FileMode.Create, FileAccess.Write);
-                StreamWriter wID = new StreamWriter(fileID);
+                //FileStream fileID = new FileStream(dir + "/tmp.tmp", FileMode.Create, FileAccess.Write);
+                //StreamWriter wID = new StreamWriter(fileID);
                 ArrayList ID = new ArrayList();
                 ArrayList coloms = new ArrayList();
                 foreach (string s in checkedListBoxAlongId.CheckedItems)
                 {
-                    wID.WriteLine(s);
+              //      wID.WriteLine(s);
                     ID.Add(s);
                 }
                // string col = "";
                 foreach (string s in checkedListBoxColAlongId.CheckedItems)
                 {
-                    wID.WriteLine(s);
+              //      wID.WriteLine(s);
                     coloms.Add(s);
                 //    col += s;
                 }
                // MessageBox.Show(col);
-                wID.Close();
-                fileID.Close();
+             //   wID.Close();
+             //   fileID.Close();
                 controller.PlotSelectItemAlongID(ID, coloms);
             }
         }
@@ -248,17 +259,18 @@ namespace GUI
             }
             if (checkedListBoxXT.CheckedItems.Count != 0)
             {
-                FileStream fileID = new FileStream(dir + "/tmp.tmp", FileMode.Create, FileAccess.Write);
-                StreamWriter wID = new StreamWriter(fileID);
+                //FileStream fileID = new FileStream(dir + "/tmp.tmp", FileMode.Create, FileAccess.Write);
+                //StreamWriter wID = new StreamWriter(fileID);
                 ArrayList ID = new ArrayList();
                 //ArrayList coloms = new ArrayList();
                 foreach (string s in checkedListBoxXT.CheckedItems)
                 {
-                    wID.WriteLine(s);
+                   // wID.WriteLine(s);
                     ID.Add(s);
                 }
-                wID.Close();
-                fileID.Close();
+               // wID.Close();
+               // fileID.Close();
+                MessageBox.Show("Formexec");
                 controller.PlotSelectItemXT(ID);
             }
         }
@@ -537,21 +549,30 @@ namespace GUI
         {
             if (tabControl.SelectedIndex == 0)
             {
+                videlitToolStripMenuItem.Enabled = true;
                 selectToolStripMenuItem.Enabled = false;
                 sortingToolStripMenuItem.Enabled = false;
                 styleToolStripMenuItem.Enabled = false;
             }
             else if (tabControl.SelectedIndex == 1)
             {
+                videlitToolStripMenuItem.Enabled = true;
                 selectToolStripMenuItem.Enabled = true;
                 sortingToolStripMenuItem.Enabled = true;
                 styleToolStripMenuItem.Enabled = true;
             }
             else if (tabControl.SelectedIndex == 2)
             {
+                videlitToolStripMenuItem.Enabled = true;
                 selectToolStripMenuItem.Enabled = true;
                 sortingToolStripMenuItem.Enabled = true;
                 styleToolStripMenuItem.Enabled = true;
+            }
+            else if (tabControl.SelectedIndex == 3)
+            {
+                videlitToolStripMenuItem.Enabled = false;
+                sortingToolStripMenuItem.Enabled = false;
+                styleToolStripMenuItem.Enabled = false;
             }
         }
 
@@ -565,6 +586,26 @@ namespace GUI
         {
             var stl = new Line(this);
             stl.Show();
+        }
+
+        private void buttonPlot3d_Click(object sender, EventArgs e)
+        {
+            string[] tmp = ((string)comboBox3D.SelectedItem).Split(new char[] { ' ' });
+            int i = 0;
+            string red = "";
+            string nam = "";
+            foreach(string s in tmp)
+            {
+                if (i == 0)
+                    red = s;
+                else if (i == 1)
+                    nam += s;
+                else
+                    nam += " " + s;
+                i++;
+            }
+            this.controller.plot3d(red, (string)comboBox3D.SelectedItem);
+            //MessageBox.Show(tmp[0]);
         }
 
         /*private void buttonPlotCX_Click(object sender, EventArgs e)

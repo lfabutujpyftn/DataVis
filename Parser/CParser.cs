@@ -8,6 +8,7 @@ using System.Threading;
 using System.Collections;
 using Tuner;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace Parser
 {
@@ -411,6 +412,155 @@ namespace Parser
             filef.Close();
         }
         
+
+
+        //=======================
+        public void Parse3d()
+        {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            Console.WriteLine("start");
+            FileStream filed = new FileStream(filedgrg, FileMode.Open, FileAccess.Read);
+            FileStream filef = new FileStream(filefgrg, FileMode.Open, FileAccess.Read);
+            StreamReader readerd = new StreamReader(filed);
+            StreamReader readerf = new StreamReader(filef);
+            Dictionary<int, StreamWriter> fileDic = new Dictionary<int, StreamWriter>();
+            ArrayList files = new ArrayList();
+            Dictionary<string, int> dict = new Dictionary<string, int>();
+            int tmpi = 0;
+            int TLCol = 0;
+            foreach (DataNode data in columsTun)
+            {
+                if (data.reduction == "TL")
+                    TLCol = tmpi;
+                if (data.measure != "служебный")
+                    if (data.reduction != "X")
+                        dict.Add(data.reduction, tmpi);
+                tmpi++;
+            }
+            Console.WriteLine("tl colom " + TLCol);
+            foreach(var i in dict)
+            {
+                Console.WriteLine(i.Key + " " + i.Value);
+            }
+            Directory.CreateDirectory(dir + "/3d");
+            foreach (var i in dict)
+            {
+                FileStream tmpName = new FileStream(dir + "/3d/" + i.Key, FileMode.Create, FileAccess.Write);
+                StreamWriter writer = new StreamWriter(tmpName);
+                fileDic.Add(i.Value, writer);
+                files.Add(tmpName);
+            }
+            int columLine = 0;
+            while (!readerd.EndOfStream)
+            {
+                string str = readerd.ReadLine();
+                string[] tmp = str.Split(new char[] { ' ' });
+                int i = 0;
+                string num = "";
+                string t = "";
+                string dt = "";
+                string start = "";
+                string finish = "";
+                string flag = "";
+                foreach (string s in tmp)
+                {
+                    if (s.Trim() != "")
+                    {
+                        if (i == 0)
+                            num = s;
+                        if (i == 1)
+                            t = s;
+                        if (i == 2)
+                            dt = s;
+                        if (i == 3)
+                            start = s;
+                        if (i == 4)
+                            finish = s;
+                        if (i == 5)
+                            flag = s;
+                        ++i;
+                    }
+                }
+                if(flag == "0")
+                {
+                    foreach(var f in fileDic)
+                    {
+                        f.Value.WriteLine("");
+                    }
+                }
+                for (int k = Int32.Parse(start); k <= Int32.Parse(finish); ++k)
+                {
+                    columLine++;
+                    if (columLine % 100000 == 0)
+                        Console.WriteLine(columLine);
+                    string str2 = readerf.ReadLine();
+                    if (flag != "0")
+                       continue;
+                    if (columLine % 1 != 0)
+                    {
+                        continue;
+                    }
+                    string[] tmp2 = str2.Split(new char[] { ' ' });
+                    var arr = new ArrayList();
+                    foreach (string s in tmp2)
+                    {
+                        if (s.Trim() != "")
+                        {
+                            arr.Add(s);
+                        }
+                    }
+                    foreach(var f in fileDic)
+                    {
+                        
+                        if (arr[TLCol].ToString() == "8")
+                        {
+                            //MessageBox.Show("8");
+                            double xc = Double.Parse(arr[0].ToString());
+                            xc -= 0.000001;
+                            f.Value.WriteLine(xc + " " + t + " " + arr[f.Key]);
+                        }
+                        else if (arr[TLCol].ToString() == "16")
+                        {
+                            double xc = Double.Parse(arr[0].ToString());
+                            xc -= 0.0;
+                            f.Value.WriteLine(xc + " " + t + " " + arr[f.Key]);
+                        }
+                        else if (arr[TLCol].ToString() == "32")
+                        {
+                            double xc = Double.Parse(arr[0].ToString());
+                            xc += 0.000001;
+                            f.Value.WriteLine(xc + " " + t + " " + arr[f.Key]);
+                        }
+                        else if (arr[TLCol].ToString() == "64")
+                        {
+                            double xc = Double.Parse(arr[0].ToString());
+                            xc += 0.000002;
+                            f.Value.WriteLine(xc + " " + t + " " + arr[f.Key]);
+                        }
+                        else
+                        {
+                            f.Value.WriteLine(arr[0] + " " + t + " " + arr[f.Key]);
+                        }
+                    }
+                }
+            }
+            readerf.Close();
+            filef.Close();
+            foreach (var f in fileDic)
+            {
+                f.Value.Close();
+            }
+            foreach (FileStream f in files)
+            {
+                f.Close();
+            }
+            //writer.Close();
+            //tmpName.Close();
+        }
+
+        //==========================
+
+
     }
 
 

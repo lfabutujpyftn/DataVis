@@ -1,7 +1,0 @@
-C:\Games\git\DataVis\Plotter\bin\Release\Plotter.dll
-C:\Games\git\DataVis\Plotter\bin\Release\Plotter.pdb
-C:\Games\git\DataVis\Plotter\bin\Release\GNUPlot.dll
-C:\Games\git\DataVis\Plotter\bin\Release\GNUPlot.pdb
-C:\Games\git\DataVis\Plotter\obj\Release\Plotter.csprojResolveAssemblyReference.cache
-C:\Games\git\DataVis\Plotter\obj\Release\Plotter.dll
-C:\Games\git\DataVis\Plotter\obj\Release\Plotter.pdb

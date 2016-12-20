@@ -39,6 +39,7 @@ namespace Controller
             //parser.ParseAlongID_XT();
             //parser.ParseXT();
             //parser.Parse();
+            parser.Parse3d();
             plt = new Plot.Plot();
         }
         public CController(string dir)
@@ -62,6 +63,10 @@ namespace Controller
         public void ParseCT()
         {
             parser.ParseConstT();
+        }
+        public void Parse3d()
+        {
+            parser.Parse3d();
         }
         public void ParseAID_XT()
         {
@@ -288,6 +293,8 @@ namespace Controller
                // if (data.measure != "служебный")
                     dictFGRGCOL.Add(data.reduction, tmpi);
             }
+
+            MessageBox.Show("Controller preproc");
             int flagi = 0;
             foreach(string id in idline)
             {
@@ -319,6 +326,7 @@ namespace Controller
                 }
                 flagi++;
             }
+            MessageBox.Show("Controller parse");
 
             ArrayList fileList = new ArrayList();
             ArrayList titleList = new ArrayList();
@@ -336,6 +344,8 @@ namespace Controller
                 col.Add(((StlLine)this.tuner.styleLineTun[dict3[numline[tmpi].ToString()]]).col);
                 tmpi++; 
             }
+
+            MessageBox.Show("Controller exec");
             plt.XTitle = "X";
             plt.YTitle = variable;
             plt.DrawFiles(fileList, titleList, lw, pt, col);
@@ -388,6 +398,20 @@ namespace Controller
             return this.tuner.loadLine();
         }
 
+        public void plot3d(string red, string nam)
+        {
+            plt.draw3dfile(dir + "/3d/" + red, nam);
+        }
+        public void savePathLoadDir(string dir)
+        {
+            tuner.savePathLoadDir(dir);
+        }
+
+        public void savePathParseDir(string d, string f, string o, string dir)
+        {
+            tuner.savePathParseDir(d, f, o, dir);
+        }
+
     }
     public class Test
     {
@@ -396,9 +420,17 @@ namespace Controller
             System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Console.WriteLine(CultureInfo.CurrentCulture.ToString());
             Console.WriteLine("hi");
-            var contr = new CController("C:\\Владимир\\Учеба\\Универ\\Диплом\\testdata\\d_grg",
-                "C:\\Владимир\\Учеба\\Универ\\Диплом\\testdata\\f_grg", "C:\\Владимир\\Учеба\\Универ\\Диплом\\testdata\\o_grg",
+            var contr = new CController("C:\\Владимир\\Учеба\\Универ\\Диплом\\testdata2\\d_grg",
+                "C:\\Владимир\\Учеба\\Универ\\Диплом\\testdata2\\f_grg", "C:\\Владимир\\Учеба\\Универ\\Диплом\\testdata\\o_grg",
                 "C:\\atmp");
+
+           /* var contr = new CController("C:\\Владимир\\Учеба\\Универ\\Диплом\\lfyyst\\tmp\\new_d.rez",
+                "C:\\Владимир\\Учеба\\Универ\\Диплом\\lfyyst\\tmp\\new_f.rez", "C:\\Владимир\\Учеба\\Универ\\Диплом\\testdata\\o_grg",
+                "C:\\atmp");*/
+
+            /*var contr = new CController("C:\\Владимир\\Учеба\\Универ\\Диплом\\lfyyst\\tmp\\d_grg.rez",
+                "C:\\Владимир\\Учеба\\Универ\\Диплом\\lfyyst\\tmp\\f_grg.rez", "C:\\Владимир\\Учеба\\Универ\\Диплом\\testdata\\o_grg",
+                "C:\\atmp");*/
         }
     }
 }

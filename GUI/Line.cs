@@ -112,6 +112,8 @@ namespace GUI
             butOk.Location = new Point(button1.Location.X, button1.Location.Y + (button1.Height + 10) * count);
             butOk.Text = "Ok";
             butOk.Click += new EventHandler(buttonOk_Click);
+            //this.Size.Width = butOk.Location.X + butOk.Size.Width + 10;
+            //this.Size.Height = butOk.Location.Y + butOk.Size.Height = 10;
             this.Controls.Add(butOk);
         }
         private void button_Click(object sender, EventArgs e)
