@@ -5,6 +5,7 @@ using System.IO;
 using System.Threading;
 using System.Linq;
 using System.Collections;
+using System.Windows.Forms;
 
 namespace AwokeKnowing.GnuplotCSharp
 {
@@ -22,6 +23,7 @@ namespace AwokeKnowing.GnuplotCSharp
         static GnuPlot()
         {
             PathToGnuplot = @"C:\Program Files\gnuplot\bin";
+            //PathToGnuplot = @"D:\Nata\Visual Studio\Визуализция\gnuplot\bin";
             //PathToGnuplot = @"C:\Program Files (x86)\gnuplot\bin\";
             if (PathToGnuplot[PathToGnuplot.Length - 1].ToString() != @"\")
                 PathToGnuplot += @"\";
@@ -132,6 +134,7 @@ namespace AwokeKnowing.GnuplotCSharp
                 PlotBuffer.Add(new StoredPlot("\"" + s + "\"", param[i].ToString()));
                 i++;
             }
+            MessageBox.Show("gnuplot plots");
             Plot(PlotBuffer);
         }
 
@@ -236,6 +239,8 @@ namespace AwokeKnowing.GnuplotCSharp
 
         public static void Plot(List<StoredPlot> storedPlots)
         {
+
+            MessageBox.Show("gnuplot plot str");
             ReplotWithSplot = false;
             string plot = "plot ";
             string plotstring = "";
@@ -331,6 +336,8 @@ namespace AwokeKnowing.GnuplotCSharp
                     
                 }
             }
+
+            MessageBox.Show("gnuplot plot fnsh");
             GnupStWr.Flush();
         }
 

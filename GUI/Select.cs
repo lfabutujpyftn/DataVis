@@ -199,6 +199,13 @@ namespace GUI
                         dict2[res] = 0;
 
                     }
+                    else
+                    {
+                        if (mainForm.tabControl.SelectedIndex == 1)
+                            mainForm.checkedListBoxAlongId.SetItemChecked(i, false);
+                        if (mainForm.tabControl.SelectedIndex == 2)
+                            mainForm.checkedListBoxXT.SetItemChecked(i, false);
+                    }
                     dict2[res]++;
                 }
             }
