@@ -91,6 +91,18 @@ namespace GUI
             butOk.Location = new Point(button1.Location.X, button1.Location.Y + (comboBox1.Height + 10) * count);
             butOk.Text = "Ok";
             butOk.Click += new EventHandler(button_Click);
+            if (butOk.Location.Y + butOk.Height + 50 < 700)
+            {
+                this.MinimumSize = new Size(424, butOk.Location.Y + butOk.Height + 50);
+                this.MaximumSize = new Size(424, butOk.Location.Y + butOk.Height + 50);
+                this.Size = new Size(424, butOk.Location.Y + butOk.Height + 50);
+            }
+            else
+            {
+                this.MinimumSize = new Size(424, 700);
+                this.MaximumSize = new Size(424, 700);
+                this.Size = new Size(424, 700);
+            }
             this.Controls.Add(butOk);
         }
 

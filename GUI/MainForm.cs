@@ -25,6 +25,7 @@ namespace GUI
         public string dgrg;
         public string fgrg;
         public string ogrg;
+        public string pathToGNP;
         bool legend;
         bool autoscale;
         public bool xrange;
@@ -51,11 +52,30 @@ namespace GUI
             selectToolStripMenuItem.Enabled = false;
             sortingToolStripMenuItem.Enabled = false;
             styleToolStripMenuItem.Enabled = false;
+            pathToGNP = "C:/Program Files/gnuplot/bin/gnuplot.exe";
+            tabControl.Enabled = false;
+            settingToolStripMenuItem.Enabled = false;
+            videlitToolStripMenuItem.Enabled = false;
+            if (File.Exists("./Setting/gnuplot.tun"))
+            {
+                FileStream file = new FileStream("./Setting/gnuplot.tun", FileMode.Open, FileAccess.Read);
+                StreamReader reader = new StreamReader(file);
+                pathToGNP = reader.ReadLine();
+                toolStripMenuItem2.Text = pathToGNP;
+                file.Close();
+            }
+            else 
+            {
+                fileToolStripMenuItem.Enabled = false;
+                settingToolStripMenuItem.Enabled = true;
+                legendToolStripMenuItem.Enabled = false;
+                rangeToolStripMenuItem.Enabled = false;
+            }
         }
 
         public void init(string dir)
         {
-            controller = new CController(dir);
+            controller = new CController(dir, pathToGNP);
             this.dir = dir;
             initData(); 
             tabControl.Enabled = true;
@@ -65,7 +85,7 @@ namespace GUI
         }
         public void init(string dgrg, string fgrg, string ogrg, string dir)
         {
-            controller = new CController(dgrg, fgrg, ogrg, dir);
+            controller = new CController(dgrg, fgrg, ogrg, dir,pathToGNP);
             this.dir = dir;
             this.dgrg = dgrg;
             this.fgrg = fgrg;
@@ -155,9 +175,6 @@ namespace GUI
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            tabControl.Enabled = false;
-            settingToolStripMenuItem.Enabled = false;
-            videlitToolStripMenuItem.Enabled = false;
         }
         
 
@@ -270,7 +287,7 @@ namespace GUI
                 }
                // wID.Close();
                // fileID.Close();
-                MessageBox.Show("Formexec");
+           //     MessageBox.Show("Formexec");
                 controller.PlotSelectItemXT(ID);
             }
         }
@@ -606,6 +623,36 @@ namespace GUI
             }
             this.controller.plot3d(red, (string)comboBox3D.SelectedItem);
             //MessageBox.Show(tmp[0]);
+        }
+
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            DialogResult res = openFileDialog1.ShowDialog();
+            if (res == System.Windows.Forms.DialogResult.OK)
+            {
+                dir = openFileDialog1.FileName.Replace("\\", "/");
+                toolStripMenuItem2.Text = dir;
+                fileToolStripMenuItem.Enabled = true;
+                settingToolStripMenuItem.Enabled = false;
+                legendToolStripMenuItem.Enabled = true;
+                rangeToolStripMenuItem.Enabled = true;
+                if (File.Exists("./Setting/gnuplot.tun"))
+                {
+                    FileStream file = new FileStream("./Setting/gnuplot.tun", FileMode.Create);
+                    StreamWriter filewr = new StreamWriter(file);
+                    filewr.WriteLine(dir);
+                    filewr.Close();
+                    file.Close();
+                    System.Windows.Forms.Application.Restart();
+                    System.Environment.Exit(0);
+                }
+                FileStream file2 = new FileStream("./Setting/gnuplot.tun", FileMode.Create);
+                StreamWriter filewr2 = new StreamWriter(file2);
+                filewr2.WriteLine(dir);
+                filewr2.Close();
+                file2.Close();
+            }
         }
 
         /*private void buttonPlotCX_Click(object sender, EventArgs e)

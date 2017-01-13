@@ -41,7 +41,7 @@ namespace Plot
         string YTitle { get; set; }
         string Title { get; set; }
         void DrawFile(string filePath);
-        void DrawPoints(IEnumerable<Point> points);
+        //void DrawPoints(IEnumerable<Point> points);
        
     }
 }

@@ -39,6 +39,11 @@ namespace GUI
         {
             if (dir != "")
             {
+                if (!Directory.Exists(dir))
+                {
+                    MessageBox.Show("Directory " + dir + " not exists");
+                    return;
+                }
                 main.init(dir);
                 main.Enabled = true;
                 main.controller.savePathLoadDir(dir);

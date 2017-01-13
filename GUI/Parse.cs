@@ -95,6 +95,28 @@ namespace GUI
         {
             if (d != "" && f != "" && dir != "" && o != "")
             {
+                string err = "";
+                if (!File.Exists(d))
+                {
+                    err += d + " ";
+                }
+                if (!File.Exists(f))
+                {
+                    err += f + " ";
+                }
+                if (!File.Exists(o))
+                {
+                    err += o + " ";
+                }
+                if (!Directory.Exists(dir))
+                {
+                    err += dir + " ";
+                }
+                if (err != "")
+                {
+                    MessageBox.Show("File " + err + " not exists");
+                    return;
+                }
                 if(parse == false)
                 {
                     buttonD.Enabled = false;
@@ -103,8 +125,8 @@ namespace GUI
                     buttonDir.Enabled = false;
                     buttonParse.Enabled = false;
                     Thread th = new Thread(func);
-                    mainform.init(d, f, o, dir);
-                    mainform.controller.savePathParseDir(d, f, o, dir);
+                    //mainform.init(d, f, o, dir);
+                    //mainform.controller.savePathParseDir(d, f, o, dir);
                    // mainform = new MainForm(main, d, f, dir);
                     //Task tsk = new Task(func);
                     //func();
@@ -142,15 +164,24 @@ namespace GUI
         private void func()
         {
             System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+
+            textBox1.Text = "Cleaning directory";
+            if (Directory.Exists(dir))
+            {
+                Directory.Delete(dir, true);
+            }
+            progressBar.Value += 100 / 4;
+            mainform.init(d, f, o, dir);
+            mainform.controller.savePathParseDir(d, f, o, dir);
             textBox1.Text = "Parse const t diagram data";
             mainform.controller.ParseCT();
-            progressBar.Value += 100 / 3;
+            progressBar.Value += 100 / 4;
             textBox1.Text = "Parse along ID and XT diagram data";
             mainform.controller.ParseAID_XT();
-            progressBar.Value += 100 / 3;
+            progressBar.Value += 100 / 4;
             textBox1.Text = "Parse 3d diagram data";
             mainform.controller.Parse3d();
-            progressBar.Value += 100 / 3;
+            progressBar.Value += 100 / 4;
             buttonParse.Text = "Start";
             this.parse = true;
             buttonParse.Enabled = true;

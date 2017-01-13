@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
+using System.Diagnostics;
 using System.Threading;
 using System.Linq;
 using System.Collections;
@@ -134,7 +134,7 @@ namespace AwokeKnowing.GnuplotCSharp
                 PlotBuffer.Add(new StoredPlot("\"" + s + "\"", param[i].ToString()));
                 i++;
             }
-            MessageBox.Show("gnuplot plots");
+           // MessageBox.Show("gnuplot plots");
             Plot(PlotBuffer);
         }
 
@@ -240,7 +240,7 @@ namespace AwokeKnowing.GnuplotCSharp
         public static void Plot(List<StoredPlot> storedPlots)
         {
 
-            MessageBox.Show("gnuplot plot str");
+           // MessageBox.Show("gnuplot plot str");
             ReplotWithSplot = false;
             string plot = "plot ";
             string plotstring = "";
@@ -305,6 +305,7 @@ namespace AwokeKnowing.GnuplotCSharp
                 }
                 if (i == 0) plot = ", ";
             }
+            //MessageBox.Show(plotstring);
             GnupStWr.WriteLine(plotstring);
 
             for (int i = 0; i < storedPlots.Count; i++)
@@ -337,7 +338,7 @@ namespace AwokeKnowing.GnuplotCSharp
                 }
             }
 
-            MessageBox.Show("gnuplot plot fnsh");
+            //MessageBox.Show("gnuplot plot fnsh");
             GnupStWr.Flush();
         }
 

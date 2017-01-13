@@ -109,7 +109,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
-            this.MaximumSize = new System.Drawing.Size(424, 300);
+            this.MaximumSize = new System.Drawing.Size(424, 586);
             this.MinimumSize = new System.Drawing.Size(424, 300);
             this.Name = "Select";
             this.Text = "Select";

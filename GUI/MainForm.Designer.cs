@@ -60,10 +60,13 @@
             this.yrangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.styleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pathToGNUPlotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videlitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.videlitallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ochistitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -307,7 +310,8 @@
             this.legendToolStripMenuItem,
             this.sortingToolStripMenuItem,
             this.rangeToolStripMenuItem,
-            this.styleToolStripMenuItem});
+            this.styleToolStripMenuItem,
+            this.pathToGNUPlotToolStripMenuItem});
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
             this.settingToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.settingToolStripMenuItem.Text = "Setting";
@@ -315,7 +319,7 @@
             // legendToolStripMenuItem
             // 
             this.legendToolStripMenuItem.Name = "legendToolStripMenuItem";
-            this.legendToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.legendToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.legendToolStripMenuItem.Text = "Legend";
             this.legendToolStripMenuItem.Click += new System.EventHandler(this.legendToolStripMenuItem_Click);
             // 
@@ -325,7 +329,7 @@
             this.iDToolStripMenuItem,
             this.lineTypeToolStripMenuItem});
             this.sortingToolStripMenuItem.Name = "sortingToolStripMenuItem";
-            this.sortingToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.sortingToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.sortingToolStripMenuItem.Text = "Sorting";
             // 
             // iDToolStripMenuItem
@@ -351,7 +355,7 @@
             this.xrangeToolStripMenuItem,
             this.yrangeToolStripMenuItem});
             this.rangeToolStripMenuItem.Name = "rangeToolStripMenuItem";
-            this.rangeToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.rangeToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.rangeToolStripMenuItem.Text = "Range";
             // 
             // autoscaleToolStripMenuItem
@@ -382,7 +386,7 @@
             this.styleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lineToolStripMenuItem});
             this.styleToolStripMenuItem.Name = "styleToolStripMenuItem";
-            this.styleToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.styleToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.styleToolStripMenuItem.Text = "Style";
             // 
             // lineToolStripMenuItem
@@ -391,6 +395,15 @@
             this.lineToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.lineToolStripMenuItem.Text = "Line";
             this.lineToolStripMenuItem.Click += new System.EventHandler(this.lineToolStripMenuItem_Click);
+            // 
+            // pathToGNUPlotToolStripMenuItem
+            // 
+            this.pathToGNUPlotToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2});
+            this.pathToGNUPlotToolStripMenuItem.Name = "pathToGNUPlotToolStripMenuItem";
+            this.pathToGNUPlotToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.pathToGNUPlotToolStripMenuItem.Text = "Path to GNUPlot";
+            //this.pathToGNUPlotToolStripMenuItem.Click += new System.EventHandler(this.pathToGNUPlotToolStripMenuItem_Click);
             // 
             // videlitToolStripMenuItem
             // 
@@ -422,6 +435,17 @@
             this.selectToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.selectToolStripMenuItem.Text = "Select";
             this.selectToolStripMenuItem.Click += new System.EventHandler(this.selectToolStripMenuItem_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Text = "Select";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // MainForm
             // 
@@ -486,6 +510,9 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Button buttonPlot3d;
         private System.Windows.Forms.ComboBox comboBox3D;
+        private System.Windows.Forms.ToolStripMenuItem pathToGNUPlotToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
     }
 }
 

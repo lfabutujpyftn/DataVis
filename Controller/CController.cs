@@ -20,7 +20,7 @@ namespace Controller
         public Plot.Plot plt;
         public string dir;
         //plt.DrawFile("C:/Games/git/DataVis/GUI/bin/Debug/tmp/ConstT/1.0539576e-002_x_u");
-        public CController(string d, string f, string o, string dir)
+        public CController(string d, string f, string o, string dir, string pathToGNP)
         {
             if(Directory.Exists(dir))
             {
@@ -40,9 +40,9 @@ namespace Controller
             //parser.ParseXT();
             //parser.Parse();
             parser.Parse3d();
-            plt = new Plot.Plot();
+            plt = new Plot.Plot(pathToGNP);
         }
-        public CController(string dir)
+        public CController(string dir, string pathToGNP)
         {
             tuner = new CTuner(dir);
             tuner.TUN();
@@ -56,7 +56,7 @@ namespace Controller
             //parser.ParseAlongID();
             //parser.ParseXT();
             //parser.Parse();
-            plt = new Plot.Plot();
+            plt = new Plot.Plot(pathToGNP);
         }
 
         
@@ -294,7 +294,7 @@ namespace Controller
                     dictFGRGCOL.Add(data.reduction, tmpi);
             }
 
-            MessageBox.Show("Controller preproc");
+           // MessageBox.Show("Controller preproc");
             int flagi = 0;
             foreach(string id in idline)
             {
@@ -326,7 +326,7 @@ namespace Controller
                 }
                 flagi++;
             }
-            MessageBox.Show("Controller parse");
+           // MessageBox.Show("Controller parse");
 
             ArrayList fileList = new ArrayList();
             ArrayList titleList = new ArrayList();
@@ -345,7 +345,7 @@ namespace Controller
                 tmpi++; 
             }
 
-            MessageBox.Show("Controller exec");
+          //  MessageBox.Show("Controller exec");
             plt.XTitle = "X";
             plt.YTitle = variable;
             plt.DrawFiles(fileList, titleList, lw, pt, col);
@@ -420,9 +420,9 @@ namespace Controller
             System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             Console.WriteLine(CultureInfo.CurrentCulture.ToString());
             Console.WriteLine("hi");
-            var contr = new CController("C:\\Владимир\\Учеба\\Универ\\Диплом\\testdata2\\d_grg",
+            /*var contr = new CController("C:\\Владимир\\Учеба\\Универ\\Диплом\\testdata2\\d_grg",
                 "C:\\Владимир\\Учеба\\Универ\\Диплом\\testdata2\\f_grg", "C:\\Владимир\\Учеба\\Универ\\Диплом\\testdata\\o_grg",
-                "C:\\atmp");
+                "C:\\atmp");*/
 
            /* var contr = new CController("C:\\Владимир\\Учеба\\Универ\\Диплом\\lfyyst\\tmp\\new_d.rez",
                 "C:\\Владимир\\Учеба\\Универ\\Диплом\\lfyyst\\tmp\\new_f.rez", "C:\\Владимир\\Учеба\\Универ\\Диплом\\testdata\\o_grg",

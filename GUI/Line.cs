@@ -114,6 +114,18 @@ namespace GUI
             butOk.Click += new EventHandler(buttonOk_Click);
             //this.Size.Width = butOk.Location.X + butOk.Size.Width + 10;
             //this.Size.Height = butOk.Location.Y + butOk.Size.Height = 10;
+            if (butOk.Location.Y + butOk.Height + 50 < 700)
+            {
+                this.MinimumSize = new Size(499, butOk.Location.Y + butOk.Height + 50);
+                this.MaximumSize = new Size(499, butOk.Location.Y + butOk.Height + 50);
+                this.Size = new Size(499, butOk.Location.Y + butOk.Height + 50);
+            }
+            else
+            {
+                this.MinimumSize = new Size(499, 700);
+                this.MaximumSize = new Size(499, 700);
+                this.Size = new Size(499, 700);
+            }
             this.Controls.Add(butOk);
         }
         private void button_Click(object sender, EventArgs e)
