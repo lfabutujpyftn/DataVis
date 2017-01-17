@@ -221,14 +221,25 @@ namespace Controller
             ArrayList pt = new ArrayList();
             ArrayList col = new ArrayList();
             variable = reduct[0].ToString();
-           // string mes = "";
+            // string mes = "";
+            List<string> selectedtitle = new List<string>();
             foreach (string s2 in reduct)
             {
                 tmpi = 0;
                 foreach (string s in idline)
                 {
                     fileList.Add(dir + "/AlongID/" + s + "_" + numline[tmpi] + "_t_" + s2);
-                    titleList.Add(s2 + ", " + dict2[numline[tmpi].ToString()] + ", ID=" + s);
+                    string tmptitle = dict2[numline[tmpi].ToString()];
+                    if (selectedtitle.Contains(tmptitle))
+                    {
+                        titleList.Add("");
+                    }
+                    else
+                    {
+                        selectedtitle.Add(tmptitle);
+                        titleList.Add(tmptitle);
+                    }
+                   // titleList.Add(s2 + ", " + dict2[numline[tmpi].ToString()] + ", ID=" + s);
                     lw.Add(((StlLine)this.tuner.styleLineTun[dict3[numline[tmpi].ToString()]]).num);
                     pt.Add(((StlLine)this.tuner.styleLineTun[dict3[numline[tmpi].ToString()]]).numpt);
                     col.Add(((StlLine)this.tuner.styleLineTun[dict3[numline[tmpi].ToString()]]).col);
@@ -335,10 +346,21 @@ namespace Controller
             ArrayList col = new ArrayList();
             variable = "t";
             tmpi = 0;
+            List<string> selectedtitle = new List<string>();
             foreach (string s in idline)
             {
                 fileList.Add(dir + "/XT/" + s + "_" + numline[tmpi] + "_x_t");
-                titleList.Add(dict2[numline[tmpi].ToString()] + ", ID=" + s);
+                string tmptitle = dict2[numline[tmpi].ToString()];
+                if(selectedtitle.Contains(tmptitle))
+                {
+                    titleList.Add("");
+                }
+                else
+                {
+                    selectedtitle.Add(tmptitle);
+                    titleList.Add(tmptitle);
+                }
+               // titleList.Add(dict2[numline[tmpi].ToString()] + ", ID=" + s);
                 lw.Add(((StlLine)this.tuner.styleLineTun[dict3[numline[tmpi].ToString()]]).num);
                 pt.Add(((StlLine)this.tuner.styleLineTun[dict3[numline[tmpi].ToString()]]).numpt);
                 col.Add(((StlLine)this.tuner.styleLineTun[dict3[numline[tmpi].ToString()]]).col);

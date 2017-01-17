@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Parser;
@@ -56,6 +57,10 @@ namespace GUI
             tabControl.Enabled = false;
             settingToolStripMenuItem.Enabled = false;
             videlitToolStripMenuItem.Enabled = false;
+            if (!Directory.Exists("./Setting"))
+            {
+                Directory.CreateDirectory("./Setting");
+            } 
             if (File.Exists("./Setting/gnuplot.tun"))
             {
                 FileStream file = new FileStream("./Setting/gnuplot.tun", FileMode.Open, FileAccess.Read);
@@ -225,8 +230,37 @@ namespace GUI
                 }
             //    wT.Close();
             //    fileT.Close();
-                controller.PlotSelectItemConstT(time, coloms);
+                Thread thread = new Thread(this.pltct);
+                thread.Start(new Data(time, coloms));
+               // controller.PlotSelectItemConstT(time, coloms);
             }
+        }
+
+        private void pltct(object data)
+        {
+            this.buttonPlotCT.Enabled = false;
+            Data tmp = (Data)data;
+            controller.PlotSelectItemConstT(tmp.d1, tmp.d2);
+            Thread.Sleep(3000);
+            this.buttonPlotCT.Enabled = true;
+        }
+
+        private void pltaid(object data)
+        {
+            this.buttonPlotAlongId.Enabled = false;
+            Data tmp = (Data)data;
+            controller.PlotSelectItemAlongID(tmp.d1, tmp.d2);
+            Thread.Sleep(3000);
+            this.buttonPlotAlongId.Enabled = true;
+        }
+
+        private void pltxt(object data)
+        {
+            this.buttonPlotXt.Enabled = false;
+            Data tmp = (Data)data;
+            controller.PlotSelectItemXT(tmp.d1);
+            Thread.Sleep(3000);
+            this.buttonPlotXt.Enabled = true;
         }
 
         private void buttonPlotAlongId_Click(object sender, EventArgs e)
@@ -263,8 +297,10 @@ namespace GUI
                 }
                // MessageBox.Show(col);
              //   wID.Close();
-             //   fileID.Close();
-                controller.PlotSelectItemAlongID(ID, coloms);
+                //   fileID.Close();
+                Thread thread = new Thread(this.pltaid);
+                thread.Start(new Data(ID, coloms));
+                //controller.PlotSelectItemAlongID(ID, coloms);
             }
         }
 
@@ -287,8 +323,10 @@ namespace GUI
                 }
                // wID.Close();
                // fileID.Close();
-           //     MessageBox.Show("Formexec");
-                controller.PlotSelectItemXT(ID);
+                //     MessageBox.Show("Formexec");
+                Thread thread = new Thread(this.pltxt);
+                thread.Start(new Data(ID, new ArrayList()));
+                //controller.PlotSelectItemXT(ID);
             }
         }
 
@@ -675,6 +713,17 @@ namespace GUI
         {
             sortingToolStripMenuItem.Enabled = true;
         }*/
+    }
+
+    public class Data
+    {
+        public ArrayList d1;
+        public ArrayList d2;
+        public Data(ArrayList arg1, ArrayList arg2)
+        {
+            d1 = arg1;
+            d2 = arg2;
+        }
     }
 
     public class MySortClass

@@ -176,7 +176,12 @@ namespace Plot
             //string par = "using 1:2 ";
             string par = " ";
             if (legend)
-                par += "title \"" + title + "\"";
+            {
+                if(title != "")
+                    par += "title \"" + title + "\"";
+                else
+                    par += "notitle";
+            }
             else
                 par += "notitle";
            /* switch (_drawType)

@@ -49,14 +49,14 @@ namespace GNUPlot
             foreach(string s in files)
             {
                 outSCR += "\"" + s + "\"" + " " + param[i];
-                if(i != files.Count)
+                if(i + 1 != files.Count)
                 {
                     outSCR += ", ";
                 }
                 ++i;
             }
             FileStream fileT = new FileStream("./last2dScript.gp", FileMode.Create, FileAccess.Write);
-            StreamWriter writer = new StreamWriter(fileT);
+            StreamWriter writer = new StreamWriter(fileT, System.Text.Encoding.Default);
             writer.Write(outSCR);
             writer.Flush();
             fileT.Close();
