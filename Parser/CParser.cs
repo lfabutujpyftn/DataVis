@@ -388,6 +388,7 @@ namespace Parser
                         FileStream tmpName = new FileStream(dir + "/AlongID_XT/" + arr[IDcolom].ToString() + "_" + type, FileMode.Create, FileAccess.Write);
                         files.Add(tmpName);
                         StreamWriter writer = new StreamWriter(tmpName);
+                        writer.WriteLine(t + " " + str2);
                         fileDic.Add(id + " " + type, writer);
                     }
                 }
